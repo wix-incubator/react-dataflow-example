@@ -14,7 +14,7 @@ export default class ListView extends Component {
   renderRowById(rowId) {
     return (
       <li key={rowId}>
-        {this.props.renderRow(_.get(this.props.rowsById, rowId))}
+        {this.props.renderRow(rowId, _.get(this.props.rowsById, rowId))}
       </li>
     );
   }
