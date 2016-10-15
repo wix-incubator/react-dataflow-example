@@ -45,8 +45,8 @@ export function getSelectedTopicUrls(state) {
   return state.topics.selectedTopicUrls;
 }
 
-export function getSelectedTopicUrlsMap(state) {
-  return _.keyBy(state.topics.selectedTopicUrls);
+export function getSelectedTopicsByUrl(state) {
+  return _.mapValues(_.keyBy(state.topics.selectedTopicUrls), (topicUrl) => state.topics.topicsByUrl[topicUrl]);
 }
 
 export function isTopicSelectionValid(state) {
