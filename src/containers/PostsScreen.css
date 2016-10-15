@@ -1,0 +1,33 @@
+.PostsScreen {
+  padding: 20px;
+}
+
+.PostsScreen ul {
+  list-style: none;
+  padding-left: 0;
+  width: 640px;
+  margin: auto;
+  border: 1px solid #aaa;
+}
+
+.PostsScreen li {
+  text-align: left;
+  border-bottom: 1px solid #aaa;
+  cursor: pointer;
+}
+
+.PostsScreen li > div {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+}
+
+.PostsScreen li h3 {
+  padding: 10px;
+  margin: 0;
+}
+
+.PostsScreen .thumbnail {
+  max-width: 60px;
+}
