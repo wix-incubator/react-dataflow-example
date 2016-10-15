@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './PostsScreen.css';
+import * as postsActions from '../store/posts/actions';
 
 class PostsScreen extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(postsActions.fetchPosts());
+  }
 
   render() {
     return (
