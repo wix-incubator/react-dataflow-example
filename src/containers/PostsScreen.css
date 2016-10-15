@@ -1,13 +1,34 @@
 .PostsScreen {
   padding: 20px;
+  display: flex;
+}
+
+.PostsScreen .LeftPane {
+  flex: 3;
+}
+
+.PostsScreen .ContentPane {
+  flex: 7;
+  padding: 10px;
+  margin-left: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 65px);
+  align-self: center;
+}
+
+.PostsScreen .ContentPane img {
+  max-width: 100%;
+  max-height: calc(100vh - 80px);
 }
 
 .PostsScreen ul {
   list-style: none;
   padding-left: 0;
-  width: 640px;
   margin: auto;
   border: 1px solid #aaa;
+  max-height: calc(100vh - 90px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .PostsScreen li {
@@ -26,6 +47,7 @@
 .PostsScreen li h3 {
   padding: 10px;
   margin: 0;
+  font-size: 16px;
 }
 
 .PostsScreen .thumbnail {
