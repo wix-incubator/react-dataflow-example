@@ -31,3 +31,19 @@
 .PostsScreen .thumbnail {
   max-width: 60px;
 }
+
+.PostsScreen .TopicFilter {
+  height: 40px;
+}
+
+.PostsScreen .TopicFilter a {
+  margin: 0 15px;
+  line-height: 40px;
+  color: blue;
+  text-decoration: none;
+}
+
+.PostsScreen .TopicFilter a.selected {
+
+  color: grey;
+}
