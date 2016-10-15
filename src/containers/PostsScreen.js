@@ -50,7 +50,7 @@ class PostsScreen extends Component {
   }
 
   onFilterChanged(newFilter) {
-    console.log(newFilter);
+    this.props.dispatch(postsActions.changeFilter(newFilter));
   }
 
 }
