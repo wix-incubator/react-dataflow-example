@@ -19,7 +19,9 @@ export default class PostView extends Component {
 
   renderBody() {
     return (
-      <div dangerouslySetInnerHTML={this._getBodyMarkup(this.props.post.body)} />
+      <div>
+        {this.props.post.body}
+      </div>
     );
   }
 
@@ -36,12 +38,6 @@ export default class PostView extends Component {
         <a href={this.props.post.url} target="_blank">Open</a>
       </div>
     );
-  }
-
-  _getBodyMarkup(body) {
-    return {
-      __html: body.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec)).replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
-    }
   }
 
   _isImage(url) {

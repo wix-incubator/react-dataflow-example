@@ -52,7 +52,7 @@ class RedditService {
     }
     return _.map(children, (post) => {
       // abstract away the specifics of the reddit API response and take only the fields we care about
-      const body = _.get(post, 'data.selftext_html');
+      const body = _.get(post, 'data.selftext');
       return {
         id: _.get(post, 'data.id'),
         title: _.get(post, 'data.title'),
