@@ -6,7 +6,7 @@ export default class TopicFilter extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        {this.renderFilter('', 'All')}
+        {this.renderFilter('all', 'All')}
         {_.map(this.props.topics, (topic, topicId) => this.renderFilter(topicId, topic.title))}
       </div>
     );
