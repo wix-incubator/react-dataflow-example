@@ -58,9 +58,10 @@ class TopicsScreen extends Component {
 
 // which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
+  const [topicsByUrl, topicsUrlArray] = topicsSelectors.getTopics(state);
   return {
-    rowsById: topicsSelectors.getTopicsByUrl(state),
-    rowsIdArray: topicsSelectors.getTopicsUrlArray(state),
+    rowsById: topicsByUrl,
+    rowsIdArray: topicsUrlArray,
     selectedIdsMap: topicsSelectors.getSelectedTopicUrlsMap(state),
     canFinalizeSelection: topicsSelectors.isTopicSelectionValid(state)
   };

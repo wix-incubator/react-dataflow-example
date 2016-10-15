@@ -35,12 +35,10 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
-export function getTopicsByUrl(state) {
-  return state.topics.topicsByUrl;
-}
-
-export function getTopicsUrlArray(state) {
-  return _.keys(state.topics.topicsByUrl);
+export function getTopics(state) {
+  const topicsByUrl = state.topics.topicsByUrl;
+  const topicsUrlArray = _.keys(topicsByUrl);
+  return [topicsByUrl, topicsUrlArray];
 }
 
 export function getSelectedTopicUrls(state) {
