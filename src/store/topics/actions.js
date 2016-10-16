@@ -25,10 +25,14 @@ export function fetchTopics() {
 export function selectTopic(topicUrl) {
   return (dispatch, getState) => {
     const selectedTopics = topicsSelectors.getSelectedTopicUrls(getState());
-    if (_.indexOf(selectedTopics, topicUrl) !== -1) return;
-    const newSelectedTopics = selectedTopics.length < 3 ?
-      selectedTopics.concat(topicUrl) :
-      selectedTopics.slice(1).concat(topicUrl);
+    let newSelectedTopics;
+    if (_.indexOf(selectedTopics, topicUrl) !== -1) {
+      newSelectedTopics = _.without(selectedTopics, topicUrl);
+    } else {
+      newSelectedTopics = selectedTopics.length < 3 ?
+        selectedTopics.concat(topicUrl) :
+        selectedTopics.slice(1).concat(topicUrl);
+    }
     dispatch({ type: types.TOPICS_SELECTED, selectedTopicUrls: newSelectedTopics  });
   };
 }
