@@ -24,7 +24,8 @@ class RedditService {
     if (!children) {
       throw new Error(`RedditService getDefaultSubreddits failed, children not returned`);
     }
-    return _.map(children, (subreddit) => {
+    const sortedBySubscribers = _.orderBy(children, 'data.subscribers', 'desc');
+    return _.map(sortedBySubscribers, (subreddit) => {
       // abstract away the specifics of the reddit API response and take only the fields we care about
       return {
         title: _.get(subreddit, 'data.display_name'),
