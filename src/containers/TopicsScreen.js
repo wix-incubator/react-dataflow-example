@@ -1,3 +1,8 @@
+// containers are "smart" react components that are aware of redux
+// they are connected to the redux store and listen on part of the app state
+// they use mapStateToProps to specify which parts and use selectors to read them
+// avoid having view logic & local component state in them, use "dumb" components instead
+
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
@@ -64,6 +69,7 @@ class TopicsScreen extends Component {
 }
 
 // which props do we want to inject, given the global store state?
+// always use selectors here and avoid accessing the state directly
 function mapStateToProps(state) {
   const [topicsByUrl, topicsUrlArray] = topicsSelectors.getTopics(state);
   return {
