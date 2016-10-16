@@ -24,13 +24,13 @@ class TopicsScreen extends Component {
   }
 
   render() {
-    if (!this.props.rowsById) return this.renderLoading();
+    if (!this.props.topicsByUrl) return this.renderLoading();
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
         <ListView
-          rowsIdArray={this.props.rowsIdArray}
-          rowsById={this.props.rowsById}
+          rowsIdArray={this.props.topicsUrlArray}
+          rowsById={this.props.topicsByUrl}
           renderRow={this.renderRow} />
         {!this.props.canFinalizeSelection ? false :
           <button className="NextScreen" onClick={this.onNextScreenClick} />
@@ -45,21 +45,21 @@ class TopicsScreen extends Component {
     );
   }
 
-  renderRow(rowId, row) {
-    const selected = this.props.selectedRowsById[rowId];
+  renderRow(topicUrl, topic) {
+    const selected = this.props.selectedTopicsByUrl[topicUrl];
     return (
       <ListRow
-        rowId={rowId}
+        rowId={topicUrl}
         onClick={this.onRowClick}
         selected={selected}>
-        <h3>{row.title}</h3>
-        <p>{row.description}</p>
+        <h3>{topic.title}</h3>
+        <p>{topic.description}</p>
       </ListRow>
     )
   }
 
-  onRowClick(rowId) {
-    this.props.dispatch(topicsActions.selectTopic(rowId));
+  onRowClick(topicUrl) {
+    this.props.dispatch(topicsActions.selectTopic(topicUrl));
   }
 
   onNextScreenClick() {
@@ -73,9 +73,9 @@ class TopicsScreen extends Component {
 function mapStateToProps(state) {
   const [topicsByUrl, topicsUrlArray] = topicsSelectors.getTopics(state);
   return {
-    rowsById: topicsByUrl,
-    rowsIdArray: topicsUrlArray,
-    selectedRowsById: topicsSelectors.getSelectedTopicsByUrl(state),
+    topicsByUrl,
+    topicsUrlArray,
+    selectedTopicsByUrl: topicsSelectors.getSelectedTopicsByUrl(state),
     canFinalizeSelection: topicsSelectors.isTopicSelectionValid(state)
   };
 }
