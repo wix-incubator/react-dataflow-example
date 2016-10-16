@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import './PostsScreen.css';
 import * as postsActions from '../store/posts/actions';
@@ -10,6 +11,11 @@ import TopicFilter from '../components/TopicFilter';
 import PostView from '../components/PostView';
 
 class PostsScreen extends Component {
+
+  constructor(props) {
+    super(props);
+    autoBind(this);
+  }
 
   componentDidMount() {
     this.props.dispatch(postsActions.fetchPosts());
@@ -24,12 +30,12 @@ class PostsScreen extends Component {
             className="TopicFilter"
             topics={this.props.topicsByUrl}
             selected={this.props.currentFilter}
-            onChanged={this.onFilterChanged.bind(this)}
+            onChanged={this.onFilterChanged}
             />
           <ListView
             rowsIdArray={this.props.rowsIdArray}
             rowsById={this.props.rowsById}
-            renderRow={this.renderRow.bind(this)} />
+            renderRow={this.renderRow} />
         </div>
         <div className="ContentPane">
           <PostView post={this.props.currentPost} />
@@ -49,7 +55,7 @@ class PostsScreen extends Component {
     return (
       <ListRow
         rowId={rowId}
-        onClick={this.onRowClick.bind(this)}
+        onClick={this.onRowClick}
         selected={selected}>
         {!row.thumbnail ? false :
           <img className="thumbnail" src={row.thumbnail} alt='thumbnail' />
