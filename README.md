@@ -2,7 +2,7 @@
 
 A real-life example of a React project with focus on dataflow management. The example explores and compares methodologies by implementing the same app in different branches:
 
-  * [Master branch](tree/master/src) - Basic Redux (thunks)
+  * [Master branch](/src) - Basic Redux (thunks)
 
 ## Running locally
 
