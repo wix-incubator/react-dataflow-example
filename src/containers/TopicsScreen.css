@@ -1,5 +1,7 @@
 .TopicsScreen {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .TopicsScreen ul {
@@ -8,6 +10,9 @@
   width: 640px;
   margin: auto;
   border: 1px solid #aaa;
+  max-height: calc(100vh - 110px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .TopicsScreen li {

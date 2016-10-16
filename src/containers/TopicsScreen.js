@@ -22,6 +22,7 @@ class TopicsScreen extends Component {
     if (!this.props.rowsById) return this.renderLoading();
     return (
       <div className="TopicsScreen">
+        <h3>Choose 3 topics of interest</h3>
         <ListView
           rowsIdArray={this.props.rowsIdArray}
           rowsById={this.props.rowsById}
