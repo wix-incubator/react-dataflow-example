@@ -9,3 +9,7 @@ export async function fetchAllTopics() {
 export function toggleTopicSelection(topicUrl) {
   store.setters.toggleTopic(topicUrl);
 }
+
+export function finishTopicsSelection() {
+  store.setters.finishTopicsSelection();
+}

@@ -71,6 +71,10 @@ class TopicsScreen extends Component {
   onRowClick(topicUrl) {
     topicsActions.toggleTopicSelection(topicUrl);
   }
+
+  onNextScreenClick() {
+    topicsActions.finishTopicsSelection();
+  }
 }
 
 export default connect(TopicsScreen);

@@ -22,6 +22,10 @@ export const setters = remx.setters({
       state.selectedTopics.push(topicUrl);
       state.selectedTopics = _.takeRight(state.selectedTopics, MAX_TOPICS_SELECTED);
     }
+  },
+
+  finishTopicsSelection() {
+
   }
 });
 

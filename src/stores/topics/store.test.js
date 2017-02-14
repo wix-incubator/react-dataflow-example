@@ -65,4 +65,5 @@ describe('topics store', () => {
     store.setters.toggleTopic('topic3');
     expect(store.getters.canFinishTopicsSelection()).toBe(true);
   });
+
 });

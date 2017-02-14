@@ -28,4 +28,9 @@ describe('topics actions', () => {
     expect(mockStore.setters.toggleTopic).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.toggleTopic).toHaveBeenCalledWith('theTopicUrl');
   });
+
+  it('finish topic selection', () => {
+    actions.finishTopicsSelection();
+    expect(mockStore.setters.finishTopicsSelection).toHaveBeenCalledTimes(1);
+  });
 });
