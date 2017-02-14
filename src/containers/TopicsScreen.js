@@ -48,11 +48,13 @@ class TopicsScreen extends Component {
   }
 
   renderRow(topicUrl, topic) {
+    const isSelected = topicsStore.getters.isTopicSelected(topicUrl);
+
     return (
       <ListRow
         rowId={topicUrl}
         onClick={this.onRowClick}
-        selected={false}>
+        selected={isSelected}>
         <h3>{topic.title}</h3>
         <p>{topic.description}</p>
       </ListRow>
@@ -60,7 +62,7 @@ class TopicsScreen extends Component {
   }
 
   onRowClick(topicUrl) {
-    alert(topicUrl);
+    topicsActions.selectTopic(topicUrl);
   }
 }
 
