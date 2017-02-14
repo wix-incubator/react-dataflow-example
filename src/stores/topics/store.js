@@ -10,6 +10,10 @@ export const setters = remx.setters({
   setTopics(topics) {
     state.topicsByUrl = _.keyBy(topics, (t) => t.url);
     state.loading = false;
+  },
+
+  toggleTopic(topicUrl) {
+
   }
 });
 
@@ -24,5 +28,9 @@ export const getters = remx.getters({
 
   getAllTopicsUrls() {
     return _.map(state.topicsByUrl, (t) => t.url);
+  },
+
+  isTopicSelected(topicUrl) {
+    return false;
   }
 });

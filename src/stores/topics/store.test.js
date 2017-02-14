@@ -27,4 +27,8 @@ describe('topics store', () => {
     store.setters.setTopics([topic1, topic2]);
     expect(store.getters.getAllTopicsUrls()).toEqual(['url1', 'url2']);
   });
+
+  it('holds topics selections', () => {
+    expect(store.getters.isTopicSelected('someTopicUrl')).toBe(false);
+  });
 });
