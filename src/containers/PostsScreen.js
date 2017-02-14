@@ -15,10 +15,22 @@ class PostsScreen extends Component {
   }
 
   render() {
+    if (true) return this.renderLoading();
+
     return (
       <div className="PostsScreen">
-        <h3>PostsScreen</h3>
+        <div className="LeftPane">
+        </div>
+        <div className="ContentPane">
+        </div>
       </div>
+    );
+  }
+
+
+  renderLoading() {
+    return (
+      <p>Loading...</p>
     );
   }
 }
