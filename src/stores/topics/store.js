@@ -1,3 +1,14 @@
+import _ from 'lodash';
+
+const state = {
+  topicsByUrl: {}
+};
+
+export const setters = {
+  setTopics(topics) {
+    state.topicsByUrl = _.keyBy(topics, (t) => t.url);
+  }
+};
 
 export const getters = {
   isLoading() {
@@ -5,6 +16,6 @@ export const getters = {
   },
 
   getAllTopicsByUrl() {
-    return {};
+    return state.topicsByUrl;
   }
 };
