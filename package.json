@@ -2,17 +2,40 @@
   "name": "react-dataflow-example",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.6.1"
-  },
-  "dependencies": {
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "lodash": "4.x.x",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-autobind": "1.x.x",
+    "remx": "0.x.x"
+  },
+  "devDependencies": {
+    "jest": "18.x.x",
+    "jest-cli": "18.x.x",
+    "babel-cli": "6.x.x",
+    "babel-core": "6.x.x",
+    "babel-polyfill": "6.x.x",
+    "babel-preset-react": "6.x.x",
+    "babel-preset-latest": "6.x.x",
+    "babel-preset-stage-0": "6.x.x",
+    "babel-register": "6.x.x",
+    "babel-jest": "18.x.x",
+    "eslint": "3.x.x",
+    "eslint-plugin-babel": "4.x.x",
+    "eslint-plugin-react": "6.x.x",
+    "react-scripts": "latest"
+  },
+  "babel": {
+    "presets": [
+      "stage-0",
+      "latest",
+      "react"
+    ]
   }
 }
