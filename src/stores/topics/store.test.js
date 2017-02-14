@@ -15,4 +15,9 @@ describe('topics store', () => {
       'url2': topic2
     });
   });
+
+  it('stops loading when setTopics called', () => {
+    store.setters.setTopics([]);
+    expect(store.getters.isLoading()).toEqual(false);
+  });
 });
