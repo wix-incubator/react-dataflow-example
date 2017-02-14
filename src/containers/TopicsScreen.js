@@ -7,11 +7,16 @@ import autoBind from 'react-autobind';
 import './TopicsScreen.css';
 
 import * as topicsStore from '../stores/topics/store';
+import * as topicsActions from '../stores/topics/actions';
 
 class TopicsScreen extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  componentDidMount() {
+    topicsActions.fetchAllTopics();
   }
 
   render() {
