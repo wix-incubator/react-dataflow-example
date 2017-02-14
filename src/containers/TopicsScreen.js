@@ -64,7 +64,7 @@ class TopicsScreen extends Component {
   }
 
   onRowClick(topicUrl) {
-    topicsActions.selectTopic(topicUrl);
+    topicsActions.toggleTopicSelection(topicUrl);
   }
 }
 

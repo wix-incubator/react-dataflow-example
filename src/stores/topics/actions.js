@@ -6,6 +6,6 @@ export async function fetchAllTopics() {
   store.setters.setTopics(topics);
 }
 
-export function selectTopic(topicUrl) {
+export function toggleTopicSelection(topicUrl) {
   store.setters.toggleTopic(topicUrl);
 }

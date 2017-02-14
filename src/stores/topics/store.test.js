@@ -1,8 +1,12 @@
-import * as store from './store';
-
 describe('topics store', () => {
+  let store;
   const topic1 = { url: 'url1', title: 'title1' };
   const topic2 = { url: 'url2', title: 'title2' };
+
+  beforeEach(() => {
+    jest.resetModules();
+    store = require('./store');
+  });
 
   it('initial state loading', () => {
     expect(store.getters.isLoading()).toEqual(true);
@@ -32,5 +36,13 @@ describe('topics store', () => {
     store.setters.toggleTopic('myTopicUrl');
     expect(store.getters.isTopicSelected('someTopicUrl')).toBe(false);
     expect(store.getters.isTopicSelected('myTopicUrl')).toBe(true);
+  });
+
+  it('topic selection toggle', () => {
+    expect(store.getters.isTopicSelected('myTopicUrl')).toBe(false);
+    store.setters.toggleTopic('myTopicUrl');
+    expect(store.getters.isTopicSelected('myTopicUrl')).toBe(true);
+    store.setters.toggleTopic('myTopicUrl');
+    expect(store.getters.isTopicSelected('myTopicUrl')).toBe(false);
   });
 });

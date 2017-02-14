@@ -14,7 +14,11 @@ export const setters = remx.setters({
   },
 
   toggleTopic(topicUrl) {
-    state.selectedTopics.push(topicUrl);
+    if (getters.isTopicSelected(topicUrl)) {
+      _.remove(state.selectedTopics, _.matches(topicUrl));
+    } else {
+      state.selectedTopics.push(topicUrl);
+    }
   }
 });
 

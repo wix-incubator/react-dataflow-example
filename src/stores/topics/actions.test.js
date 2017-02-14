@@ -24,7 +24,7 @@ describe('topics actions', () => {
   });
 
   it('select topic', () => {
-    actions.selectTopic('theTopicUrl');
+    actions.toggleTopicSelection('theTopicUrl');
     expect(mockStore.setters.toggleTopic).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.toggleTopic).toHaveBeenCalledWith('theTopicUrl');
   });
