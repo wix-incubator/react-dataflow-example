@@ -6,6 +6,8 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import './TopicsScreen.css';
 
+import { connect } from 'remx/react';
+
 import * as topicsStore from '../stores/topics/store';
 import * as topicsActions from '../stores/topics/actions';
 
@@ -20,7 +22,7 @@ class TopicsScreen extends Component {
   }
 
   render() {
-    if (topicsStore.getters.isLoading) return this.renderLoading();
+    if (topicsStore.getters.isLoading()) return this.renderLoading();
 
     return (
       <div className="TopicsScreen">
@@ -36,4 +38,4 @@ class TopicsScreen extends Component {
   }
 }
 
-export default TopicsScreen;
+export default connect(TopicsScreen);
