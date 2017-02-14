@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import * as remx from 'remx';
 
+const MAX_TOPICS_SELECTED = 3;
+
 const state = remx.state({
   loading: true,
   topicsByUrl: {},
@@ -18,7 +20,7 @@ export const setters = remx.setters({
       state.selectedTopics = _.without(state.selectedTopics, topicUrl);
     } else {
       state.selectedTopics.push(topicUrl);
-      state.selectedTopics = _.takeRight(state.selectedTopics, 3);
+      state.selectedTopics = _.takeRight(state.selectedTopics, MAX_TOPICS_SELECTED);
     }
   }
 });
@@ -42,5 +44,9 @@ export const getters = remx.getters({
 
   getSelectedTopicUrls() {
     return remx.toJS(state.selectedTopics);
+  },
+
+  canFinishSelection() {
+    return _.size(state.selectedTopics) === MAX_TOPICS_SELECTED;
   }
 });
