@@ -6,7 +6,8 @@ const MAX_TOPICS_SELECTED = 3;
 const state = remx.state({
   loading: true,
   topicsByUrl: {},
-  selectedTopics: []
+  selectedTopics: [],
+  finishedTopicsSelection: false
 });
 
 export const setters = remx.setters({
@@ -25,7 +26,7 @@ export const setters = remx.setters({
   },
 
   finishTopicsSelection() {
-
+    state.finishedTopicsSelection = true;
   }
 });
 
@@ -52,5 +53,9 @@ export const getters = remx.getters({
 
   canFinishTopicsSelection() {
     return _.size(state.selectedTopics) === MAX_TOPICS_SELECTED;
+  },
+
+  isFinishedTopicsSelection() {
+    return state.finishedTopicsSelection;
   }
 });

@@ -66,4 +66,9 @@ describe('topics store', () => {
     expect(store.getters.canFinishTopicsSelection()).toBe(true);
   });
 
+  it('holds wether finished with topics selection', () => {
+    expect(store.getters.isFinishedTopicsSelection()).toBe(false);
+    store.setters.finishTopicsSelection();
+    expect(store.getters.isFinishedTopicsSelection()).toBe(true);
+  });
 });
