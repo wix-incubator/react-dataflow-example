@@ -29,6 +29,8 @@ describe('topics store', () => {
   });
 
   it('holds topics selections', () => {
+    store.setters.toggleTopic('myTopicUrl');
     expect(store.getters.isTopicSelected('someTopicUrl')).toBe(false);
+    expect(store.getters.isTopicSelected('myTopicUrl')).toBe(true);
   });
 });

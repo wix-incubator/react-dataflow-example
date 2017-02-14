@@ -3,7 +3,8 @@ import * as remx from 'remx';
 
 const state = remx.state({
   loading: true,
-  topicsByUrl: {}
+  topicsByUrl: {},
+  selectedTopics: []
 });
 
 export const setters = remx.setters({
@@ -13,7 +14,7 @@ export const setters = remx.setters({
   },
 
   toggleTopic(topicUrl) {
-
+    state.selectedTopics.push(topicUrl);
   }
 });
 
@@ -31,6 +32,6 @@ export const getters = remx.getters({
   },
 
   isTopicSelected(topicUrl) {
-    return false;
+    return _.includes(state.selectedTopics, topicUrl);
   }
 });
