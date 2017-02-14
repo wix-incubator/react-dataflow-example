@@ -4,7 +4,6 @@ describe('topics store', () => {
   const topic2 = { url: 'url2', title: 'title2' };
 
   beforeEach(() => {
-    jest.resetModules();
     store = require('./store');
   });
 
