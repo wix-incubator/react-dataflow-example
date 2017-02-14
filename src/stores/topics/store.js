@@ -17,7 +17,7 @@ export const setters = remx.setters({
     if (getters.isTopicSelected(topicUrl)) {
       state.selectedTopics = _.without(state.selectedTopics, topicUrl);
     } else {
-      state.selectedTopics = _.concat(state.selectedTopics, topicUrl);
+      state.selectedTopics.push(topicUrl);
     }
   }
 });

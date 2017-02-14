@@ -41,7 +41,10 @@ describe('topics store', () => {
     expect(store.getters.isTopicSelected('myTopicUrl')).toBe(false);
     store.setters.toggleTopic('myTopicUrl');
     expect(store.getters.isTopicSelected('myTopicUrl')).toBe(true);
+    store.setters.toggleTopic('myTopicUrl2');
+    expect(store.getters.isTopicSelected('myTopicUrl2')).toBe(true);
     store.setters.toggleTopic('myTopicUrl');
     expect(store.getters.isTopicSelected('myTopicUrl')).toBe(false);
+    expect(store.getters.isTopicSelected('myTopicUrl2')).toBe(true);
   });
 });
