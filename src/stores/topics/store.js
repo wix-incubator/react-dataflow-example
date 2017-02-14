@@ -20,5 +20,9 @@ export const getters = remx.getters({
 
   getAllTopicsByUrl() {
     return state.topicsByUrl;
+  },
+
+  getAllTopicsUrls() {
+    return _.map(state.topicsByUrl, (t) => t.url);
   }
 });

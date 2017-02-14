@@ -3,11 +3,10 @@
 // any local component state and logic should be handled by presenters
 
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 
 export default class ListView extends Component {
-
   constructor(props) {
     super(props);
     autoBind(this);
@@ -34,5 +33,4 @@ export default class ListView extends Component {
       return this.props.renderRow(rowId, _.get(this.props.rowsById, rowId));
     }
   }
-
 }

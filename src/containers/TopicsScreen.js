@@ -8,6 +8,9 @@ import './TopicsScreen.css';
 
 import { connect } from 'remx/react';
 
+import ListView from '../components/ListView';
+import ListRow from '../components/ListRow';
+
 import * as topicsStore from '../stores/topics/store';
 import * as topicsActions from '../stores/topics/actions';
 
@@ -24,9 +27,16 @@ class TopicsScreen extends Component {
   render() {
     if (topicsStore.getters.isLoading()) return this.renderLoading();
 
+    const topicsByUrl = topicsStore.getters.getAllTopicsByUrl();
+    const topicUrlsArray = topicsStore.getters.getAllTopicsUrls();
+
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
+        <ListView
+          rowsIdArray={topicUrlsArray}
+          rowsById={topicsByUrl}
+          renderRow={this.renderRow} />
       </div>
     );
   }
@@ -35,6 +45,22 @@ class TopicsScreen extends Component {
     return (
       <p>Loading...</p>
     );
+  }
+
+  renderRow(topicUrl, topic) {
+    return (
+      <ListRow
+        rowId={topicUrl}
+        onClick={this.onRowClick}
+        selected={false}>
+        <h3>{topic.title}</h3>
+        <p>{topic.description}</p>
+      </ListRow>
+    );
+  }
+
+  onRowClick(topicUrl) {
+    alert(topicUrl);
   }
 }
 
