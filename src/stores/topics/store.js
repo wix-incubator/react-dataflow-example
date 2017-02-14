@@ -18,6 +18,7 @@ export const setters = remx.setters({
       state.selectedTopics = _.without(state.selectedTopics, topicUrl);
     } else {
       state.selectedTopics.push(topicUrl);
+      state.selectedTopics = _.takeRight(state.selectedTopics, 3);
     }
   }
 });
@@ -37,5 +38,9 @@ export const getters = remx.getters({
 
   isTopicSelected(topicUrl) {
     return _.includes(state.selectedTopics, topicUrl);
+  },
+
+  getSelectedTopicUrls() {
+    return remx.toJS(state.selectedTopics);
   }
 });

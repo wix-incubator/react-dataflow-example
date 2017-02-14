@@ -47,4 +47,13 @@ describe('topics store', () => {
     expect(store.getters.isTopicSelected('myTopicUrl')).toBe(false);
     expect(store.getters.isTopicSelected('myTopicUrl2')).toBe(true);
   });
+
+  it('holds max of 3 selected topics', () => {
+    store.setters.toggleTopic('topic1');
+    store.setters.toggleTopic('topic2');
+    store.setters.toggleTopic('topic3');
+    expect(store.getters.getSelectedTopicUrls()).toEqual(['topic1', 'topic2', 'topic3']);
+    store.setters.toggleTopic('topic4');
+    expect(store.getters.getSelectedTopicUrls()).toEqual(['topic2', 'topic3', 'topic4']);
+  });
 });
