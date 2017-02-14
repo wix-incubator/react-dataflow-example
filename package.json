@@ -37,5 +37,13 @@
       "latest",
       "react"
     ]
+  },
+  "jest": {
+    "testPathDirs": [
+      "node_modules",
+      "src"
+    ],
+    "resetMocks": true,
+    "resetModules": true
   }
 }
