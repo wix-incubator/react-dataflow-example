@@ -32,6 +32,8 @@ class TopicsScreen extends Component {
     const topicsByUrl = topicsStore.getters.getAllTopicsByUrl();
     const topicUrlsArray = topicsStore.getters.getAllTopicsUrls();
 
+    const canFinalizeSelection = topicsStore.getters.canFinishTopicsSelection();
+
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
@@ -39,6 +41,9 @@ class TopicsScreen extends Component {
           rowsIdArray={topicUrlsArray}
           rowsById={topicsByUrl}
           renderRow={this.renderRow} />
+        {!canFinalizeSelection ? false :
+          <button className="NextScreen" onClick={this.onNextScreenClick} />
+        }
       </div>
     );
   }

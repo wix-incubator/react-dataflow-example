@@ -46,7 +46,7 @@ export const getters = remx.getters({
     return remx.toJS(state.selectedTopics);
   },
 
-  canFinishSelection() {
+  canFinishTopicsSelection() {
     return _.size(state.selectedTopics) === MAX_TOPICS_SELECTED;
   }
 });

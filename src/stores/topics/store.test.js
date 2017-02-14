@@ -58,11 +58,11 @@ describe('topics store', () => {
   });
 
   it('topic selection finished when 3 selected', () => {
-    expect(store.getters.canFinishSelection()).toBe(false);
+    expect(store.getters.canFinishTopicsSelection()).toBe(false);
     store.setters.toggleTopic('topic1');
-    expect(store.getters.canFinishSelection()).toBe(false);
+    expect(store.getters.canFinishTopicsSelection()).toBe(false);
     store.setters.toggleTopic('topic2');
     store.setters.toggleTopic('topic3');
-    expect(store.getters.canFinishSelection()).toBe(true);
+    expect(store.getters.canFinishTopicsSelection()).toBe(true);
   });
 });
