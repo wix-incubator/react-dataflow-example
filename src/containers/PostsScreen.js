@@ -8,6 +8,8 @@ import './PostsScreen.css';
 
 import { connect } from 'remx/react';
 
+import * as postsStore from '../stores/posts/store';
+
 class PostsScreen extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class PostsScreen extends Component {
   }
 
   render() {
-    if (true) return this.renderLoading();
+    if (postsStore.getters.isLoading()) return this.renderLoading();
 
     return (
       <div className="PostsScreen">
