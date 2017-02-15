@@ -73,5 +73,14 @@ describe('reddit service', () => {
       const post1 = { id: 'id1', title: 'title1', topicUrl: 'theSubredditUrl', url: 'http://url1' };
       expect(result).toEqual([post1]);
     });
+
+    it('validates has children', async () => {
+      try {
+        await reddit.getPostsFromSubreddit('theSubredditUrl');
+        fail();
+      } catch (e) {
+        expect(e).toEqual(new Error('RedditService getPostsFromSubreddit failed, children not returned'));
+      }
+    });
   });
 });
