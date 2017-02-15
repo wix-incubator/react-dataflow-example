@@ -50,5 +50,17 @@ describe('reddit service', () => {
       const post2 = { id: 'id2', title: 'title2', topicUrl: 'theSubredditUrl', body: 'body2', thumbnail: 'http://thumb2' };
       expect(result).toEqual([post1, post2]);
     });
+
+    it('validates url for thumbnail', async () => {
+      const rawPost1 = { data: { selftext: 'body1', id: 'id1', title: 'title1', thumbnail: 'thumb1', url: 'http://url1' } };
+
+      const data = { data: { children: [rawPost1] } };
+      mockHttp.get.mockReturnValue(Promise.resolve(data));
+
+      const result = await reddit.getPostsFromSubreddit('theSubredditUrl');
+
+      const post1 = { id: 'id1', title: 'title1', topicUrl: 'theSubredditUrl', thumbnail: undefined, body: 'body1' };
+      expect(result).toEqual([post1]);
+    });
   });
 });
