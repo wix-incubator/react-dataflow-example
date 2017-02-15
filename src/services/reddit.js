@@ -52,11 +52,11 @@ export async function getPostsFromSubreddit(subredditUrl) {
       topicUrl: subredditUrl,
       body: body,
       thumbnail: validateUrl(_.get(post, 'data.thumbnail')),
-      url: !body ? validateUrl(_.get(post, 'data.url')) : undefined
+      url: !body ? validateUrl(_.get(post, 'data.url'), '') : undefined
     }
   });
 }
 
-function validateUrl(url = '') {
+function validateUrl(url) {
   return url.startsWith('http') ? url : undefined;
 }
