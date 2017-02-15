@@ -9,11 +9,16 @@ import './PostsScreen.css';
 import { connect } from 'remx/react';
 
 import * as postsStore from '../stores/posts/store';
+import * as postsActions from '../stores/posts/actions';
 
 class PostsScreen extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  componentDidMount() {
+    postsActions.fetchPosts();
   }
 
   render() {
@@ -22,6 +27,7 @@ class PostsScreen extends Component {
     return (
       <div className="PostsScreen">
         <div className="LeftPane">
+          heeeey
         </div>
         <div className="ContentPane">
         </div>
