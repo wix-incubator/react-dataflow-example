@@ -23,4 +23,14 @@ describe('reddit service', () => {
 
     expect(result).toEqual([topic1, topic2]);
   });
+
+  it('validates has children', async () => {
+    mockHttp.get.mockReturnValue(Promise.resolve([]));
+    try {
+      await reddit.getDefaultSubreddits();
+      fail();
+    } catch (e) {
+      expect(e).toEqual(new Error('RedditService getDefaultSubreddits failed, children not returned'));
+    }
+  });
 });
