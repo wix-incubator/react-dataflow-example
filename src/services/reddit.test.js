@@ -9,28 +9,46 @@ describe('reddit service', () => {
     reddit = require('./reddit');
   });
 
-  it('returns array of topics from reddit', async () => {
-    const child1 = { data: { subscribers: 10, display_name: 'name1', public_description: 'desc1', url: 'url1' } };
-    const child2 = { data: { subscribers: 20, display_name: 'name2', public_description: 'desc2', url: 'url2' } };
+  describe('getDefaultSubreddits', () => {
+    it('returns array of topics from reddit', async () => {
+      const child1 = { data: { subscribers: 10, display_name: 'name1', public_description: 'desc1', url: 'url1' } };
+      const child2 = { data: { subscribers: 20, display_name: 'name2', public_description: 'desc2', url: 'url2' } };
 
-    const data = { data: { children: [child1, child2] } };
-    mockHttp.get.mockReturnValue(Promise.resolve(data));
+      const data = { data: { children: [child1, child2] } };
+      mockHttp.get.mockReturnValue(Promise.resolve(data));
 
-    const result = await reddit.getDefaultSubreddits();
+      const result = await reddit.getDefaultSubreddits();
 
-    const topic1 = { url: 'url1', title: 'name1', description: 'desc1', subscribers: 10 };
-    const topic2 = { url: 'url2', title: 'name2', description: 'desc2', subscribers: 20 };
+      const topic1 = { url: 'url1', title: 'name1', description: 'desc1', subscribers: 10 };
+      const topic2 = { url: 'url2', title: 'name2', description: 'desc2', subscribers: 20 };
 
-    expect(result).toEqual([topic1, topic2]);
+      expect(result).toEqual([topic1, topic2]);
+    });
+
+    it('validates has children', async () => {
+      mockHttp.get.mockReturnValue(Promise.resolve([]));
+      try {
+        await reddit.getDefaultSubreddits();
+        fail();
+      } catch (e) {
+        expect(e).toEqual(new Error('RedditService getDefaultSubreddits failed, children not returned'));
+      }
+    });
   });
 
-  it('validates has children', async () => {
-    mockHttp.get.mockReturnValue(Promise.resolve([]));
-    try {
-      await reddit.getDefaultSubreddits();
-      fail();
-    } catch (e) {
-      expect(e).toEqual(new Error('RedditService getDefaultSubreddits failed, children not returned'));
-    }
+  describe('getPostsFromSubreddit', () => {
+    it('returns array of posts from reddit', async () => {
+      const rawPost1 = { data: { selftext: 'body1', id: 'id1', title: 'title1', thumbnail: 'http://thumb1', url: 'http://url1' } };
+      const rawPost2 = { data: { selftext: 'body2', id: 'id2', title: 'title2', thumbnail: 'http://thumb2', url: 'http://url2' } };
+
+      const data = { data: { children: [rawPost1, rawPost2] } };
+      mockHttp.get.mockReturnValue(Promise.resolve(data));
+
+      const result = await reddit.getPostsFromSubreddit('theSubredditUrl');
+
+      const post1 = { id: 'id1', title: 'title1', topicUrl: 'theSubredditUrl', body: 'body1', thumbnail: 'http://thumb1' };
+      const post2 = { id: 'id2', title: 'title2', topicUrl: 'theSubredditUrl', body: 'body2', thumbnail: 'http://thumb2' };
+      expect(result).toEqual([post1, post2]);
+    });
   });
 });

@@ -36,3 +36,27 @@ function parseChildren(subreddits) {
     }
   });
 }
+
+export async function getPostsFromSubreddit(subredditUrl) {
+  const data = await http.get(`${REDDIT_ENDPOINT}${subredditUrl}hot.json`);
+  const children = _.get(data, 'data.children');
+  if (!children) {
+    throw new Error(`RedditService getPostsFromSubreddit failed, children not returned`);
+  }
+  return _.map(children, (post) => {
+    // abstract away the specifics of the reddit API response and take only the fields we care about
+    const body = _.get(post, 'data.selftext');
+    return {
+      id: _.get(post, 'data.id'),
+      title: _.get(post, 'data.title'),
+      topicUrl: subredditUrl,
+      body: body,
+      thumbnail: validateUrl(_.get(post, 'data.thumbnail')),
+      url: !body ? validateUrl(_.get(post, 'data.url')) : undefined
+    }
+  });
+}
+
+function validateUrl(url = '') {
+  return url.startsWith('http') ? url : undefined;
+}
