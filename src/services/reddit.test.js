@@ -1,10 +1,11 @@
 describe('reddit service', () => {
   let reddit;
-  let mockFetch;
+  let mockHttp;
 
   beforeEach(() => {
-    global.fetch = jest.fn();
-    mockFetch = global.fetch;
+    jest.mock('./http');
+    mockHttp = require('./http');
+
     reddit = require('./reddit');
   });
 
@@ -13,7 +14,7 @@ describe('reddit service', () => {
     const child2 = { data: { subscribers: 20, display_name: 'name2', public_description: 'desc2', url: 'url2' } };
 
     const data = { data: { children: [child1, child2] } };
-    mockFetch.mockReturnValue(Promise.resolve({ ok: true, json: () => Promise.resolve(data) }));
+    mockHttp.get.mockReturnValue(Promise.resolve(data));
 
     const result = await reddit.getDefaultSubreddits();
 

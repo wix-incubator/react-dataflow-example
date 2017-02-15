@@ -6,12 +6,13 @@
 // These all should be PLUGINS to the application.
 
 import _ from 'lodash';
+import * as http from './http';
 
 const REDDIT_ENDPOINT = 'https://www.reddit.com';
 const DEFAULT_SUBREDDITS_ENDPOINT = `${REDDIT_ENDPOINT}/subreddits/default.json`;
 
 export async function getDefaultSubreddits() {
-  const data = await get(DEFAULT_SUBREDDITS_ENDPOINT);
+  const data = await http.get(DEFAULT_SUBREDDITS_ENDPOINT);
   const children = _.get(data, 'data.children');
   if (!children) {
     throw new Error(`RedditService getDefaultSubreddits failed, children not returned`);
@@ -27,15 +28,4 @@ export async function getDefaultSubreddits() {
   });
 }
 
-async function get(url) {
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json'
-    }
-  });
-  if (!response.ok) {
-    throw new Error(`failed for ${url}, status ${response.status}`);
-  }
-  return await response.json();
-}
+
