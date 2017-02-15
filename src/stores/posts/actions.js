@@ -8,5 +8,6 @@ export async function fetchPosts() {
   const promises = _.map(selectedTopicUrls, (url) => reddit.getPostsFromSubreddit(url));
   const allPostsArrays = await Promise.all(promises);
   const allPosts = _.flatten(allPostsArrays);
-  store.setters.setPosts(allPosts);
+  const shuffled = _.shuffle(allPosts);
+  store.setters.setPosts(shuffled);
 }
