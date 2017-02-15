@@ -25,13 +25,13 @@ export async function getDefaultSubreddits() {
   if (!children) {
     throw new Error(`RedditService getDefaultSubreddits failed, children not returned`);
   }
-  const sortedBySubscribers = _.orderBy(children, 'data.subscribers', 'desc');
-  return _.map(sortedBySubscribers, (subreddit) => {
+  return _.map(children, (subreddit) => {
     // abstract away the specifics of the reddit API response and take only the fields we care about
     return {
       title: _.get(subreddit, 'data.display_name'),
       description: _.get(subreddit, 'data.public_description'),
-      url: _.get(subreddit, 'data.url')
+      url: _.get(subreddit, 'data.url'),
+      subscribers: _.get(subreddit, 'data.subscribers')
     }
   });
 }

@@ -33,4 +33,16 @@ describe('topics actions', () => {
     actions.finishTopicsSelection();
     expect(mockStore.setters.finishTopicsSelection).toHaveBeenCalledTimes(1);
   });
+
+  it('fetchTopics sorts by subscribers, descending', async () => {
+    const topic1 = { subscribers: 10 };
+    const topic2 = { subscribers: 20 };
+    const topic3 = { subscribers: 15 };
+    mockRedditService.getDefaultSubreddits.mockReturnValue(Promise.resolve([topic1, topic2, topic3]));
+
+    await actions.fetchAllTopics();
+
+    expect(mockStore.setters.setTopics).toHaveBeenCalledTimes(1);
+    expect(mockStore.setters.setTopics).toHaveBeenCalledWith([topic2, topic3, topic1]);
+  });
 });
