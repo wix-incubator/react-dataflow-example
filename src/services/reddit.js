@@ -13,7 +13,12 @@ const DEFAULT_SUBREDDITS_ENDPOINT = `${REDDIT_ENDPOINT}/subreddits/default.json`
 
 export async function getDefaultSubreddits() {
   const subreddits = await fetchAndValidateSubreddits();
-  return parseChildren(subreddits);
+  return _parseSubreddit(subreddits);
+}
+
+export async function getPostsFromSubreddit(subredditUrl) {
+  const posts = await _fetchPostsAndValidate(subredditUrl);
+  return _parsePosts(posts, subredditUrl);
 }
 
 async function fetchAndValidateSubreddits() {
@@ -26,7 +31,7 @@ async function fetchAndValidateSubreddits() {
 }
 
 // abstract away the specifics of the reddit API response and take only the fields we care about
-function parseChildren(subreddits) {
+function _parseSubreddit(subreddits) {
   return _.map(subreddits, (subreddit) => {
     return {
       title: _.get(subreddit, 'data.display_name'),
@@ -37,26 +42,30 @@ function parseChildren(subreddits) {
   });
 }
 
-export async function getPostsFromSubreddit(subredditUrl) {
+async function _fetchPostsAndValidate(subredditUrl) {
   const data = await http.get(`${REDDIT_ENDPOINT}${subredditUrl}hot.json`);
   const children = _.get(data, 'data.children');
   if (!children) {
     throw new Error(`RedditService getPostsFromSubreddit failed, children not returned`);
   }
-  return _.map(children, (post) => {
-    // abstract away the specifics of the reddit API response and take only the fields we care about
+  return children;
+}
+
+// abstract away the specifics of the reddit API response and take only the fields we care about
+function _parsePosts(posts, subredditUrl) {
+  return _.map(posts, (post) => {
     const body = _.get(post, 'data.selftext');
     return {
       id: _.get(post, 'data.id'),
       title: _.get(post, 'data.title'),
       topicUrl: subredditUrl,
       body: body,
-      thumbnail: validateUrl(_.get(post, 'data.thumbnail')),
-      url: !body ? validateUrl(_.get(post, 'data.url'), '') : undefined
+      thumbnail: _validateUrl(_.get(post, 'data.thumbnail')),
+      url: !body ? _validateUrl(_.get(post, 'data.url'), '') : undefined
     }
   });
 }
 
-function validateUrl(url) {
+function _validateUrl(url) {
   return url.startsWith('http') ? url : undefined;
 }
