@@ -16,4 +16,9 @@ describe('posts store', () => {
     store.setters.setPosts([post1, post2]);
     expect(store.getters.getPostsById()).toEqual({ id1: post1, id2: post2 });
   });
+
+  it('stops loading once setPosts called', () => {
+    store.setters.setPosts([]);
+    expect(store.getters.isLoading()).toBe(false);
+  });
 });
