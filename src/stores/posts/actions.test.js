@@ -5,6 +5,11 @@ describe('posts actions', () => {
   let mockReddit;
 
   beforeEach(() => {
+    /** the ways we test business logic that relies on random things:
+     * either make it deterministic
+     * (in this case we make shuffle behave like reverse)
+     * or inject a provider that can be mocked
+     * */
     const lodash = require('lodash');
     lodash.shuffle = lodash.reverse;
     jest.setMock('lodash', lodash);
