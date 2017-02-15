@@ -8,19 +8,10 @@
 import _ from 'lodash';
 
 const REDDIT_ENDPOINT = 'https://www.reddit.com';
+const DEFAULT_SUBREDDITS_ENDPOINT = `${REDDIT_ENDPOINT}/subreddits/default.json`;
 
 export async function getDefaultSubreddits() {
-  const url = `${REDDIT_ENDPOINT}/subreddits/default.json`;
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json'
-    }
-  });
-  if (!response.ok) {
-    throw new Error(`RedditService getDefaultSubreddits failed, HTTP status ${response.status}`);
-  }
-  const data = await response.json();
+  const data = await get(DEFAULT_SUBREDDITS_ENDPOINT);
   const children = _.get(data, 'data.children');
   if (!children) {
     throw new Error(`RedditService getDefaultSubreddits failed, children not returned`);
@@ -34,4 +25,17 @@ export async function getDefaultSubreddits() {
       subscribers: _.get(subreddit, 'data.subscribers')
     }
   });
+}
+
+async function get(url) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
+    }
+  });
+  if (!response.ok) {
+    throw new Error(`failed for ${url}, status ${response.status}`);
+  }
+  return await response.json();
 }

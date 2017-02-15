@@ -22,4 +22,13 @@ describe('reddit service', () => {
 
     expect(result).toEqual([topic1, topic2]);
   });
+
+  it('validates response ok', async () => {
+    try {
+      await reddit.getDefaultSubreddits();
+      fail('expected to throw');
+    } catch (e) {
+      expect(e).toBeDefined();
+    }
+  });
 });
