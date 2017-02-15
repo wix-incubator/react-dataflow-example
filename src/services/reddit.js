@@ -13,15 +13,7 @@ const DEFAULT_SUBREDDITS_ENDPOINT = `${REDDIT_ENDPOINT}/subreddits/default.json`
 
 export async function getDefaultSubreddits() {
   const subreddits = await getAndValidateSubreddits();
-  return _.map(subreddits, (subreddit) => {
-    // abstract away the specifics of the reddit API response and take only the fields we care about
-    return {
-      title: _.get(subreddit, 'data.display_name'),
-      description: _.get(subreddit, 'data.public_description'),
-      url: _.get(subreddit, 'data.url'),
-      subscribers: _.get(subreddit, 'data.subscribers')
-    }
-  });
+  return parseChildren(subreddits);
 }
 
 async function getAndValidateSubreddits() {
@@ -33,4 +25,14 @@ async function getAndValidateSubreddits() {
   return children;
 }
 
-
+// abstract away the specifics of the reddit API response and take only the fields we care about
+function parseChildren(subreddits) {
+  return _.map(subreddits, (subreddit) => {
+    return {
+      title: _.get(subreddit, 'data.display_name'),
+      description: _.get(subreddit, 'data.public_description'),
+      url: _.get(subreddit, 'data.url'),
+      subscribers: _.get(subreddit, 'data.subscribers')
+    }
+  });
+}
