@@ -12,11 +12,11 @@ const REDDIT_ENDPOINT = 'https://www.reddit.com';
 const DEFAULT_SUBREDDITS_ENDPOINT = `${REDDIT_ENDPOINT}/subreddits/default.json`;
 
 export async function getDefaultSubreddits() {
-  const subreddits = await getAndValidateSubreddits();
+  const subreddits = await fetchAndValidateSubreddits();
   return parseChildren(subreddits);
 }
 
-async function getAndValidateSubreddits() {
+async function fetchAndValidateSubreddits() {
   const data = await http.get(DEFAULT_SUBREDDITS_ENDPOINT);
   const children = _.get(data, 'data.children');
   if (!children) {
