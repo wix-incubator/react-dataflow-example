@@ -1,5 +1,7 @@
 describe('posts store', () => {
   let store;
+  const post1 = { id: 'id1' };
+  const post2 = { id: 'id2' };
 
   beforeEach(() => {
     store = require('./store');
@@ -11,8 +13,7 @@ describe('posts store', () => {
 
   it('holds posts by id', () => {
     expect(store.getters.getPostsById()).toEqual({});
-    const post1 = { id: 'id1' };
-    const post2 = { id: 'id2' };
+
     store.setters.setPosts([post1, post2]);
     expect(store.getters.getPostsById()).toEqual({ id1: post1, id2: post2 });
   });
@@ -20,5 +21,10 @@ describe('posts store', () => {
   it('stops loading once setPosts called', () => {
     store.setters.setPosts([]);
     expect(store.getters.isLoading()).toBe(false);
+  });
+
+  it('returns posts id array', () => {
+    store.setters.setPosts([post1, post2]);
+    expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id2']);
   });
 });

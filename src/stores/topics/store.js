@@ -40,7 +40,7 @@ export const getters = remx.getters({
   },
 
   getAllTopicsUrls() {
-    return _.map(state.topicsByUrl, (t) => t.url);
+    return _.keys(state.topicsByUrl);
   },
 
   isTopicSelected(topicUrl) {

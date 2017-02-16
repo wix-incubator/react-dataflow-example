@@ -8,6 +8,11 @@ import './PostsScreen.css';
 
 import { connect } from 'remx/react';
 
+import ListRow from '../components/ListRow';
+import ListView from '../components/ListView';
+
+const ConnectedListView = connect(ListView);
+
 import * as postsStore from '../stores/posts/store';
 import * as postsActions from '../stores/posts/actions';
 
@@ -24,10 +29,17 @@ class PostsScreen extends Component {
   render() {
     if (postsStore.getters.isLoading()) return this.renderLoading();
 
+    const postsById = {};
+    const postsIdArray = [];
+
     return (
       <div className="PostsScreen">
         <div className="LeftPane">
-          heeeey
+          <ConnectedListView
+            rowsIdArray={this.props.postsIdArray}
+            rowsById={this.props.postsById}
+            renderRow={this.renderRow}
+          />
         </div>
         <div className="ContentPane">
         </div>
@@ -35,11 +47,30 @@ class PostsScreen extends Component {
     );
   }
 
-
   renderLoading() {
     return (
       <p>Loading...</p>
     );
+  }
+
+  renderRow(postId, post) {
+    const selected = false;
+
+    return (
+      <ListRow
+        rowId={postId}
+        onClick={this.onRowClick}
+        selected={selected}>
+        {!post.thumbnail ? false :
+          <img className="thumbnail" src={post.thumbnail} alt="thumbnail" />
+        }
+        <h3>{post.title}</h3>
+      </ListRow>
+    );
+  }
+
+  onRowClick(rowId) {
+    alert(rowId)
   }
 }
 

@@ -20,5 +20,9 @@ export const getters = remx.getters({
 
   getPostsById() {
     return state.postsById;
+  },
+
+  getPostsIdsArray() {
+    return _.keys(state.postsById);
   }
 });
