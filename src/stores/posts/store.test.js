@@ -27,4 +27,10 @@ describe('posts store', () => {
     store.setters.setPosts([post1, post2]);
     expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id2']);
   });
+
+  it('holds selected post', () => {
+    expect(store.getters.getSelectedPost()).toEqual(undefined);
+    store.setters.selectPost(post1);
+    expect(store.getters.getSelectedPost()).toBe(post1);
+  });
 });
