@@ -61,4 +61,8 @@ describe('posts actions', () => {
     expect(mockStore.setters.setPosts).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.setPosts).toHaveBeenCalledWith([postD, postC, postB, postA]);
   });
+
+  it('select post saves to store', () => {
+    //
+  });
 });

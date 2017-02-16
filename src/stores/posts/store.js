@@ -4,7 +4,7 @@ import * as remx from 'remx';
 const state = remx.state({
   loading: true,
   postsById: {},
-  selectedPost: undefined
+  selectedPostId: ''
 });
 
 export const setters = remx.setters({
@@ -13,8 +13,8 @@ export const setters = remx.setters({
     state.loading = false;
   },
 
-  selectPost(post) {
-    state.selectedPost = post;
+  selectPost(postId) {
+    state.selectedPostId = postId;
   }
 });
 
@@ -32,6 +32,6 @@ export const getters = remx.getters({
   },
 
   getSelectedPost() {
-    return state.selectedPost;
+    return _.get(state.postsById, state.selectedPostId);
   }
 });
