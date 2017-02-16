@@ -63,6 +63,9 @@ describe('posts actions', () => {
   });
 
   it('select post saves to store', () => {
-    //
+    actions.selectPost('theId');
+
+    expect(mockStore.setters.selectPost).toHaveBeenCalledTimes(1);
+    expect(mockStore.setters.selectPost).toHaveBeenCalledWith('theId');
   });
 });

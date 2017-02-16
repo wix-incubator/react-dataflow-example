@@ -11,3 +11,7 @@ export async function fetchPosts() {
   const shuffled = _.shuffle(allPosts);
   store.setters.setPosts(shuffled);
 }
+
+export function selectPost(postId) {
+  store.setters.selectPost(postId);
+}
