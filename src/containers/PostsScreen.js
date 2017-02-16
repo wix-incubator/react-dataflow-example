@@ -11,8 +11,6 @@ import { connect } from 'remx/react';
 import ListRow from '../components/ListRow';
 import ListView from '../components/ListView';
 
-const ConnectedListView = connect(ListView);
-
 import * as postsStore from '../stores/posts/store';
 import * as postsActions from '../stores/posts/actions';
 
@@ -29,15 +27,15 @@ class PostsScreen extends Component {
   render() {
     if (postsStore.getters.isLoading()) return this.renderLoading();
 
-    const postsById = {};
-    const postsIdArray = [];
+    const postsById = postsStore.getters.getPostsById();
+    const postsIdArray = postsStore.getters.getPostsIdsArray();
 
     return (
       <div className="PostsScreen">
         <div className="LeftPane">
-          <ConnectedListView
-            rowsIdArray={this.props.postsIdArray}
-            rowsById={this.props.postsById}
+          <ListView
+            rowsIdArray={postsIdArray}
+            rowsById={postsById}
             renderRow={this.renderRow}
           />
         </div>

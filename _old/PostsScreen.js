@@ -2,9 +2,9 @@
 // they observe the state using selectors and draw themselved using dumb components
 // avoid having view logic & local component state in them, use "dumb" components (with presenters) instead
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import autoBind from 'react-autobind';
-import {connect} from 'remx/react';
+import { connect } from 'remx/react';
 import './PostsScreen.css';
 
 import ListView from '../components/ListView';
@@ -41,10 +41,10 @@ class PostsScreen extends Component {
           <ListView
             rowsIdArray={this.props.postsIdArray}
             rowsById={this.props.postsById}
-            renderRow={this.renderRow}/>
+            renderRow={this.renderRow} />
         </div>
         <div className="ContentPane">
-          <PostView post={this.props.currentPost}/>
+          <PostView post={this.props.currentPost} />
         </div>
       </div>
     );
@@ -64,7 +64,7 @@ class PostsScreen extends Component {
         onClick={this.onRowClick}
         selected={selected}>
         {!post.thumbnail ? false :
-         <img className="thumbnail" src={post.thumbnail} alt="thumbnail"/>
+          <img className="thumbnail" src={post.thumbnail} alt="thumbnail" />
         }
         <h3>{post.title}</h3>
       </ListRow>
