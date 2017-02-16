@@ -30,7 +30,7 @@ class PostsScreen extends Component {
 
     const postsById = postsStore.getters.getPostsById();
     const postsIdArray = postsStore.getters.getPostsIdsArray();
-    const selectedPost = undefined;
+    const selectedPost = postsStore.getters.getSelectedPost();
 
     return (
       <div className="PostsScreen">
@@ -71,7 +71,7 @@ class PostsScreen extends Component {
   }
 
   onRowClick(rowId) {
-
+    postsActions.selectPost(rowId);
   }
 }
 
