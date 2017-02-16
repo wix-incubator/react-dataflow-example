@@ -2,10 +2,9 @@
 // they receive data from their parents through regular react props
 // any local component state and logic should be handled by presenters
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class PostView extends Component {
-
   render() {
     if (!this.props.post) return this.renderEmpty();
     if (this.props.post.body) return this.renderBody();
@@ -31,7 +30,7 @@ export default class PostView extends Component {
 
   renderImage() {
     return (
-      <img src={this.props.post.url} alt={this.props.post.title}/>
+      <img src={this.props.post.url} alt={this.props.post.title} />
     );
   }
 
@@ -48,5 +47,4 @@ export default class PostView extends Component {
     if (!url) return false;
     return (url.endsWith('.jpg') || url.endsWith('.gif') || url.endsWith('.png'));
   }
-
 }

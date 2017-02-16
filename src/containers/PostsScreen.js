@@ -10,6 +10,7 @@ import { connect } from 'remx/react';
 
 import ListRow from '../components/ListRow';
 import ListView from '../components/ListView';
+import PostView from '../components/PostView';
 
 import * as postsStore from '../stores/posts/store';
 import * as postsActions from '../stores/posts/actions';
@@ -29,6 +30,7 @@ class PostsScreen extends Component {
 
     const postsById = postsStore.getters.getPostsById();
     const postsIdArray = postsStore.getters.getPostsIdsArray();
+    const selectedPost = undefined;
 
     return (
       <div className="PostsScreen">
@@ -40,6 +42,7 @@ class PostsScreen extends Component {
           />
         </div>
         <div className="ContentPane">
+          <PostView post={selectedPost} />
         </div>
       </div>
     );
@@ -68,7 +71,7 @@ class PostsScreen extends Component {
   }
 
   onRowClick(rowId) {
-    alert(rowId)
+
   }
 }
 
