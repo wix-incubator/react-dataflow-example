@@ -37,4 +37,11 @@ describe('posts store', () => {
     store.setters.setPosts([post2, post1]);
     expect(store.getters.getSelectedPost()).toBe(post1);
   });
+
+  it('is post selected', () => {
+    expect(store.getters.isPostSelected('')).toBe(false);
+    expect(store.getters.isPostSelected('thePostId')).toBe(false);
+    store.setters.selectPost('thePostId');
+    expect(store.getters.isPostSelected('thePostId')).toBe(true);
+  });
 });

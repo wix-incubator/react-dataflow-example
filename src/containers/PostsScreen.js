@@ -55,7 +55,7 @@ class PostsScreen extends Component {
   }
 
   renderRow(postId, post) {
-    const selected = false;
+    const selected = postsStore.getters.isPostSelected(postId);
 
     return (
       <ListRow

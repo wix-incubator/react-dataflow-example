@@ -33,5 +33,9 @@ export const getters = remx.getters({
 
   getSelectedPost() {
     return _.get(state.postsById, state.selectedPostId);
+  },
+
+  isPostSelected(postId) {
+    return !_.isEmpty(postId) && _.isEqual(state.selectedPostId, postId);
   }
 });
