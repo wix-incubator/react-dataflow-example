@@ -1,12 +1,14 @@
 describe('topics actions', () => {
   let actions;
-  let mockRedditService, mockStore;
+  let mockRedditService, mockStore, mockPostsActions;
 
   beforeEach(() => {
     jest.mock('../../services/reddit');
     mockRedditService = require('../../services/reddit');
     jest.mock('./store');
     mockStore = require('./store');
+    jest.mock('../posts/actions');
+    mockPostsActions = require('../posts/actions');
 
     actions = require('./actions');
   });
@@ -44,5 +46,10 @@ describe('topics actions', () => {
 
     expect(mockStore.setters.setTopics).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.setTopics).toHaveBeenCalledWith([topic2, topic3, topic1]);
+  });
+
+  it('toggleTopicSelection will prefetch the posts for this topic', async () => {
+    await actions.toggleTopicSelection('topic1');
+    expect(mockPostsActions.fetchPosts).toHaveBeenCalledTimes(1);
   });
 });

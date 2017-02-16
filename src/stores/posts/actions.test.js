@@ -10,6 +10,7 @@ describe('posts actions', () => {
      * (in this case we make shuffle behave like reverse)
      * or inject a provider that can be mocked
      * */
+
     const lodash = require('lodash');
     lodash.shuffle = lodash.reverse;
     jest.setMock('lodash', lodash);
@@ -57,7 +58,6 @@ describe('posts actions', () => {
 
     expect(mockReddit.getPostsFromSubreddit).toHaveBeenCalledTimes(2);
     expect(mockReddit.getPostsFromSubreddit).toHaveBeenCalledWith('topic1');
-
     expect(mockStore.setters.setPosts).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.setPosts).toHaveBeenCalledWith([postD, postC, postB, postA]);
   });
@@ -67,5 +67,12 @@ describe('posts actions', () => {
 
     expect(mockStore.setters.selectPost).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.selectPost).toHaveBeenCalledWith('theId');
+  });
+
+  it('fetchPosts handles no selected topics', async () => {
+    expect(mockTopicsStore.getters.getSelectedTopicUrls()).toEqual(undefined);
+    await actions.fetchPosts();
+    expect(mockStore.setters.setPosts).toHaveBeenCalledTimes(1);
+    expect(mockStore.setters.setPosts).toHaveBeenCalledWith([]);
   });
 });

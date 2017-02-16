@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import * as redditService from '../../services/reddit';
 import * as store from './store';
+import * as postsActions from '../posts/actions';
 
 export async function fetchAllTopics() {
   const topics = await redditService.getDefaultSubreddits();
@@ -10,6 +11,7 @@ export async function fetchAllTopics() {
 
 export function toggleTopicSelection(topicUrl) {
   store.setters.toggleTopic(topicUrl);
+  postsActions.fetchPosts(topicUrl);
 }
 
 export function finishTopicsSelection() {
