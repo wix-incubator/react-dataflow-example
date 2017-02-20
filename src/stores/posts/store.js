@@ -37,5 +37,9 @@ export const getters = remx.getters({
 
   isPostSelected(postId) {
     return !_.isEmpty(postId) && _.isEqual(state.selectedPostId, postId);
+  },
+
+  getCurrentFilter() {
+    return 'all';
   }
 });

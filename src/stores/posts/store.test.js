@@ -44,4 +44,8 @@ describe('posts store', () => {
     store.setters.selectPost('thePostId');
     expect(store.getters.isPostSelected('thePostId')).toBe(true);
   });
+
+  it('initial filter is all', () => {
+    expect(store.getters.getCurrentFilter()).toEqual('all');
+  });
 });

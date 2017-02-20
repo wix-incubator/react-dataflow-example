@@ -3,7 +3,7 @@
 // any local component state and logic should be handled by presenters
 
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class TopicFilter extends Component {
 
@@ -35,5 +35,4 @@ export default class TopicFilter extends Component {
       this.props.onChanged(id);
     }
   }
-
 }
