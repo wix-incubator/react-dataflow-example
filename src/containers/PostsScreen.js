@@ -11,9 +11,11 @@ import { connect } from 'remx/react';
 import ListRow from '../components/ListRow';
 import ListView from '../components/ListView';
 import PostView from '../components/PostView';
+import TopicFilter from '../components/TopicFilter';
 
 import * as postsStore from '../stores/posts/store';
 import * as postsActions from '../stores/posts/actions';
+import * as topicsStore from '../stores/topics/store';
 
 class PostsScreen extends Component {
   constructor(props) {
@@ -32,9 +34,18 @@ class PostsScreen extends Component {
     const postsIdArray = postsStore.getters.getPostsIdsArray();
     const selectedPost = postsStore.getters.getSelectedPost();
 
+    const topicsByUrl = topicsStore.getters.getSelectedTopicsByUrl();
+    const currentFilter = 'all';
+
     return (
       <div className="PostsScreen">
         <div className="LeftPane">
+          <TopicFilter
+            className="TopicFilter"
+            topics={topicsByUrl}
+            selected={currentFilter}
+            onChanged={this.onFilterChanged}
+          />
           <ListView
             rowsIdArray={postsIdArray}
             rowsById={postsById}
@@ -72,6 +83,10 @@ class PostsScreen extends Component {
 
   onRowClick(rowId) {
     postsActions.selectPost(rowId);
+  }
+
+  onFilterChanged(newFilter) {
+    alert(newFilter);
   }
 }
 

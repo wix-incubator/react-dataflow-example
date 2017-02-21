@@ -6,7 +6,7 @@ const MAX_TOPICS_SELECTED = 3;
 const state = remx.state({
   loading: true,
   topicsByUrl: {},
-  selectedTopics: [],
+  selectedTopicUrls: [],
   finishedTopicsSelection: false
 });
 
@@ -18,10 +18,10 @@ export const setters = remx.setters({
 
   toggleTopic(topicUrl) {
     if (getters.isTopicSelected(topicUrl)) {
-      state.selectedTopics = _.without(state.selectedTopics, topicUrl);
+      state.selectedTopicUrls = _.without(state.selectedTopicUrls, topicUrl);
     } else {
-      state.selectedTopics.push(topicUrl);
-      state.selectedTopics = _.takeRight(state.selectedTopics, MAX_TOPICS_SELECTED);
+      state.selectedTopicUrls.push(topicUrl);
+      state.selectedTopicUrls = _.takeRight(state.selectedTopicUrls, MAX_TOPICS_SELECTED);
     }
   },
 
@@ -44,15 +44,19 @@ export const getters = remx.getters({
   },
 
   isTopicSelected(topicUrl) {
-    return _.includes(state.selectedTopics, topicUrl);
+    return _.includes(state.selectedTopicUrls, topicUrl);
   },
 
   getSelectedTopicUrls() {
-    return remx.toJS(state.selectedTopics);
+    return remx.toJS(state.selectedTopicUrls);
+  },
+
+  getSelectedTopicsByUrl() {
+    return _.mapValues(_.keyBy(state.selectedTopicUrls), (url) => state.topicsByUrl[url]);
   },
 
   canFinishTopicsSelection() {
-    return _.size(state.selectedTopics) === MAX_TOPICS_SELECTED;
+    return _.size(state.selectedTopicUrls) === MAX_TOPICS_SELECTED;
   },
 
   isFinishedTopicsSelection() {

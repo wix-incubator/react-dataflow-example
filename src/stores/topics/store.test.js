@@ -57,6 +57,15 @@ describe('topics store', () => {
     expect(store.getters.getSelectedTopicUrls()).toEqual(['topic2', 'topic3', 'topic4']);
   });
 
+  it('returns selected topics by url', () => {
+    store.setters.toggleTopic('url1');
+    store.setters.toggleTopic('url2');
+    store.setters.toggleTopic('url3');
+    expect(store.getters.getSelectedTopicsByUrl()).toEqual({});
+    store.setters.setTopics([topic1, topic2]);
+    expect(store.getters.getSelectedTopicsByUrl()).toEqual({ url1: topic1, url2: topic2 });
+  });
+
   it('topic selection finished when 3 selected', () => {
     expect(store.getters.canFinishTopicsSelection()).toBe(false);
     store.setters.toggleTopic('topic1');
