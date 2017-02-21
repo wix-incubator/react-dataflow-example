@@ -35,7 +35,7 @@ class PostsScreen extends Component {
     const selectedPost = postsStore.getters.getSelectedPost();
 
     const topicsByUrl = topicsStore.getters.getSelectedTopicsByUrl();
-    const currentFilter = 'all';
+    const currentFilter = postsStore.getters.getCurrentFilter();
 
     return (
       <div className="PostsScreen">
@@ -86,7 +86,7 @@ class PostsScreen extends Component {
   }
 
   onFilterChanged(newFilter) {
-    alert(newFilter);
+    postsActions.setFilter(newFilter);
   }
 }
 

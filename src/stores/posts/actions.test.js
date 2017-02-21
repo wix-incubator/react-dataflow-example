@@ -5,15 +5,7 @@ describe('posts actions', () => {
   let mockReddit;
 
   beforeEach(() => {
-    /** the ways we test business logic that relies on random things:
-     * either make it deterministic
-     * (in this case we make shuffle behave like reverse)
-     * or inject a provider that can be mocked
-     * */
-
-    const lodash = require('lodash');
-    lodash.shuffle = lodash.reverse;
-    jest.setMock('lodash', lodash);
+    mockLodashShuffle();
 
     jest.mock('./store');
     mockStore = require('./store');
@@ -26,6 +18,18 @@ describe('posts actions', () => {
 
     actions = require('./actions');
   });
+
+  /**
+   *  The ways we test business logic that relies on random things:
+   *  either make it deterministic
+   *  (in this case we make shuffle behave like reverse)
+   *  or inject a provider that can be mocked
+   */
+  function mockLodashShuffle() {
+    const lodash = require('lodash');
+    lodash.shuffle = lodash.reverse;
+    jest.setMock('lodash', lodash);
+  }
 
   it('fetch posts using selected topics', async () => {
     mockTopicsStore.getters.getSelectedTopicUrls.mockReturnValue(['topic1', 'topic1']);
@@ -74,5 +78,11 @@ describe('posts actions', () => {
     await actions.fetchPosts();
     expect(mockStore.setters.setPosts).toHaveBeenCalledTimes(1);
     expect(mockStore.setters.setPosts).toHaveBeenCalledWith([]);
+  });
+
+  it('setFilter delegates to store', () => {
+    actions.setFilter('myfilter');
+    expect(mockStore.setters.setFilter).toHaveBeenCalledTimes(1);
+    expect(mockStore.setters.setFilter).toHaveBeenCalledWith('myfilter');
   });
 });

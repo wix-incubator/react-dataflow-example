@@ -15,3 +15,7 @@ export async function fetchPosts() {
 export function selectPost(postId) {
   store.setters.selectPost(postId);
 }
+
+export function setFilter(filter) {
+  store.setters.setFilter(filter);
+}
