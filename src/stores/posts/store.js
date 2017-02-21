@@ -4,7 +4,8 @@ import * as remx from 'remx';
 const state = remx.state({
   loading: true,
   postsById: {},
-  selectedPostId: ''
+  selectedPostId: '',
+  currentFilter: 'all'
 });
 
 export const setters = remx.setters({
@@ -15,6 +16,10 @@ export const setters = remx.setters({
 
   selectPost(postId) {
     state.selectedPostId = postId;
+  },
+
+  setFilter(filter) {
+    state.currentFilter = filter;
   }
 });
 
@@ -40,6 +45,6 @@ export const getters = remx.getters({
   },
 
   getCurrentFilter() {
-    return 'all';
+    return state.currentFilter || 'all';
   }
 });

@@ -48,4 +48,11 @@ describe('posts store', () => {
   it('initial filter is all', () => {
     expect(store.getters.getCurrentFilter()).toEqual('all');
   });
+
+  it('holds topics filter, default is all', () => {
+    store.setters.setFilter('myFilter');
+    expect(store.getters.getCurrentFilter()).toEqual('myFilter');
+    store.setters.setFilter();
+    expect(store.getters.getCurrentFilter()).toEqual('all');
+  });
 });
