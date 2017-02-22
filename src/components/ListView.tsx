@@ -1,14 +1,18 @@
-// components are "dumb" react components that are not aware of redux
+// components are "dumb" react components that are not aware of anything but themselves
 // they receive data from their parents through regular react props
-// they are allowed to have local component state and view logic
-// use them to avoid having view logic & local component state in "smart" components
+// any local component state and logic should be handled by presenters
 
 import _ from 'lodash';
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 
-export default class ListView extends Component {
+interface Props {
+  rowsById: {};
+  rowsIdArray: string[];
+  renderRow?: (rowId: string, row: {}) => JSX.Element;
+}
 
+export default class ListView extends Component<Props, void> {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -33,7 +37,8 @@ export default class ListView extends Component {
   renderRowThroughProps(rowId) {
     if (typeof this.props.renderRow === 'function') {
       return this.props.renderRow(rowId, _.get(this.props.rowsById, rowId));
+    } else {
+      return undefined;
     }
   }
-
 }

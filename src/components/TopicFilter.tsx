@@ -1,12 +1,20 @@
-// components are "dumb" react components that are not aware of redux
+// components are "dumb" react components that are not aware of anything but themselves
 // they receive data from their parents through regular react props
-// they are allowed to have local component state and view logic
-// use them to avoid having view logic & local component state in "smart" components
+// any local component state and logic should be handled by presenters
 
 import _ from 'lodash';
 import React, { Component } from 'react';
 
-export default class TopicFilter extends Component {
+import { Topic } from '../stores/Topic';
+
+interface Props {
+  className: string;
+  topics: Topic[];
+  selected: boolean;
+  onChanged?: (id: string) => void;
+}
+
+export default class TopicFilter extends Component<Props, void> {
 
   render() {
     return (
@@ -24,7 +32,8 @@ export default class TopicFilter extends Component {
         key={id}
         href="#"
         className={className}
-        onClick={() => this.onFilterClick(id)}>
+        onClick={() => this.onFilterClick(id)}
+      >
         {label}
       </a>
     );
@@ -36,5 +45,4 @@ export default class TopicFilter extends Component {
       this.props.onChanged(id);
     }
   }
-
 }
