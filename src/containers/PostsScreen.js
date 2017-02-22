@@ -30,8 +30,8 @@ class PostsScreen extends Component {
   render() {
     if (postsStore.getters.isLoading()) return this.renderLoading();
 
-    const postsById = postsStore.getters.getPostsById();
-    const postsIdArray = postsStore.getters.getPostsIdsArray();
+    const postsById = postsStore.getters.getFilteredPostsById();
+    const postsIdArray = postsStore.getters.getFilteredPostsIdsArray();
     const selectedPost = postsStore.getters.getSelectedPost();
 
     const topicsByUrl = topicsStore.getters.getSelectedTopicsByUrl();
