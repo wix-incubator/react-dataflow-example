@@ -13,10 +13,10 @@ describe('posts store', () => {
   });
 
   it('holds posts by id', () => {
-    expect(store.getters.getPostsById()).toEqual({});
+    expect(store.getters.getFilteredPostsById()).toEqual({});
 
     store.setters.setPosts([post1, post2]);
-    expect(store.getters.getPostsById()).toEqual({ id1: post1, id2: post2 });
+    expect(store.getters.getFilteredPostsById()).toEqual({ id1: post1, id2: post2 });
   });
 
   it('stops loading once setPosts called', () => {
@@ -26,7 +26,7 @@ describe('posts store', () => {
 
   it('returns posts id array', () => {
     store.setters.setPosts([post1, post2]);
-    expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id2']);
+    expect(store.getters.getFilteredPostsIdsArray()).toEqual(['id1', 'id2']);
   });
 
   it('holds selected postId, finds the post from current posts', () => {
@@ -60,8 +60,8 @@ describe('posts store', () => {
   it('getPosts returns filtered posts', () => {
     store.setters.setPosts([post1, post2, post3]);
     store.setters.setFilter('topicUrl1');
-    expect(store.getters.getPostsById()).toEqual({ id1: post1, id3: post3 });
-    expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id3']);
+    expect(store.getters.getFilteredPostsById()).toEqual({ id1: post1, id3: post3 });
+    expect(store.getters.getFilteredPostsIdsArray()).toEqual(['id1', 'id3']);
   });
 
   it('isPostMatchesFilter', () => {

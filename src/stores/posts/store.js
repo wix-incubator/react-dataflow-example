@@ -28,12 +28,12 @@ export const getters = remx.getters({
     return state.loading;
   },
 
-  getPostsById() {
+  getFilteredPostsById() {
     return _.pickBy(state.postsById, (post) => getters.isPostMatchesFilter(post));
   },
 
-  getPostsIdsArray() {
-    return _.keys(getters.getPostsById());
+  getFilteredPostsIdsArray() {
+    return _.keys(getters.getFilteredPostsById());
   },
 
   getSelectedPost() {
