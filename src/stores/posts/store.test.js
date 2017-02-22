@@ -1,7 +1,8 @@
 describe('posts store', () => {
   let store;
-  const post1 = { id: 'id1' };
-  const post2 = { id: 'id2' };
+  const post1 = { id: 'id1', topicUrl: 'topicUrl1' };
+  const post2 = { id: 'id2', topicUrl: 'topicUrl2' };
+  const post3 = { id: 'id3', topicUrl: 'topicUrl1' };
 
   beforeEach(() => {
     store = require('./store');
@@ -54,5 +55,20 @@ describe('posts store', () => {
     expect(store.getters.getCurrentFilter()).toEqual('myFilter');
     store.setters.setFilter();
     expect(store.getters.getCurrentFilter()).toEqual('all');
+  });
+
+  xit('getPosts returns filtered posts', () => {
+    store.setters.setPosts([post1, post2, post3]);
+    expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id2', 'id3']);
+    store.setters.setFilter('topicUrl1');
+    expect(store.getters.getPostsIdsArray()).toEqual(['url1', 'url3']);
+  });
+
+  it('isPostMatchesFilter', () => {
+    expect(store.getters.isPostMatchesFilter()).toBe(true);
+    store.setters.setFilter('someTopicUrl');
+    expect(store.getters.isPostMatchesFilter({})).toBe(false);
+    expect(store.getters.isPostMatchesFilter({ topicUrl: 'someTopicUrl' })).toBe(true);
+    store.setters.setFilter(undefined);
   });
 });

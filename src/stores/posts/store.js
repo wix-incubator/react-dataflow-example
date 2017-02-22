@@ -33,7 +33,11 @@ export const getters = remx.getters({
   },
 
   getPostsIdsArray() {
-    return _.keys(state.postsById);
+    if (getters.getCurrentFilter() == 'all') {
+      return _.keys(state.postsById);
+    } else {
+      return _.filter(state.postsById, (post) => post.topicUrl == getters.getCurrentFilter());
+    }
   },
 
   getSelectedPost() {
@@ -46,5 +50,10 @@ export const getters = remx.getters({
 
   getCurrentFilter() {
     return state.currentFilter || 'all';
+  },
+
+  isPostMatchesFilter(post) {
+    const filter = getters.getCurrentFilter();
+    return _.isEqual(filter, 'all') || _.isEqual(filter, post.topicUrl);
   }
 });
