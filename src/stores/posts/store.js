@@ -33,7 +33,7 @@ export const getters = remx.getters({
   },
 
   getPostsIdsArray() {
-    return _.keys(state.postsById);
+    return _.keys(getters.getPostsById());
   },
 
   getSelectedPost() {

@@ -61,6 +61,7 @@ describe('posts store', () => {
     store.setters.setPosts([post1, post2, post3]);
     store.setters.setFilter('topicUrl1');
     expect(store.getters.getPostsById()).toEqual({ id1: post1, id3: post3 });
+    expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id3']);
   });
 
   it('isPostMatchesFilter', () => {
