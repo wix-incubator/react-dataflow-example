@@ -29,15 +29,11 @@ export const getters = remx.getters({
   },
 
   getPostsById() {
-    return state.postsById;
+    return _.pickBy(state.postsById, (post) => getters.isPostMatchesFilter(post));
   },
 
   getPostsIdsArray() {
-    if (getters.getCurrentFilter() == 'all') {
-      return _.keys(state.postsById);
-    } else {
-      return _.filter(state.postsById, (post) => post.topicUrl == getters.getCurrentFilter());
-    }
+    return _.keys(state.postsById);
   },
 
   getSelectedPost() {

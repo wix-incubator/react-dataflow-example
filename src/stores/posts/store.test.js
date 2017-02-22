@@ -57,11 +57,10 @@ describe('posts store', () => {
     expect(store.getters.getCurrentFilter()).toEqual('all');
   });
 
-  xit('getPosts returns filtered posts', () => {
+  it('getPosts returns filtered posts', () => {
     store.setters.setPosts([post1, post2, post3]);
-    expect(store.getters.getPostsIdsArray()).toEqual(['id1', 'id2', 'id3']);
     store.setters.setFilter('topicUrl1');
-    expect(store.getters.getPostsIdsArray()).toEqual(['url1', 'url3']);
+    expect(store.getters.getPostsById()).toEqual({ id1: post1, id3: post3 });
   });
 
   it('isPostMatchesFilter', () => {
