@@ -3,7 +3,7 @@
 // any local component state and logic should be handled by presenters
 
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
+import autobind from 'react-autobind';
 
 interface Props {
   selected: boolean;
@@ -14,7 +14,7 @@ interface Props {
 export default class ListRow extends Component<Props, null> {
   constructor(props: Props) {
     super(props);
-    autoBind(this);
+    autobind(this);
   }
 
   render() {

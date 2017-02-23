@@ -4,7 +4,7 @@
 
 import _ from 'lodash';
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
+import autobind from 'react-autobind';
 
 interface Props {
   rowsById: {};
@@ -15,7 +15,7 @@ interface Props {
 export default class ListView extends Component<Props, void> {
   constructor(props) {
     super(props);
-    autoBind(this);
+    autobind(this);
   }
 
   render() {

@@ -19,7 +19,12 @@ module.exports = function (wallaby) {
       'src/**/*.test.ts',
     ],
 
-    setup: function (w) {
+    compilers: {
+      '**/*.ts': wallaby.compilers.typeScript()
+    },
+
+    setup: function (wallaby) {
+      wallaby.testFramework.configure({ resetModules: true, resetMocks: true });
     }
   };
 };

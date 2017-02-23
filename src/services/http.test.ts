@@ -3,8 +3,8 @@ describe('http', () => {
   let mockFetch;
 
   beforeEach(() => {
-    fetch = jest.fn();
-    mockFetch = fetch;
+    (global as any).fetch = jest.fn();
+    mockFetch = (global as any).fetch;
 
     http = require('./http');
   });

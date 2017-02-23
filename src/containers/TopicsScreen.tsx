@@ -3,7 +3,7 @@
 // avoid having view logic & local component state in them, use "dumb" components (with presenters) instead
 
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
+import autobind from 'react-autobind';
 import './TopicsScreen.css';
 
 import { connect } from 'remx/react';
@@ -19,7 +19,7 @@ import * as topicsActions from '../stores/topics/actions';
 class TopicsScreen extends Component<void, void> {
   constructor(props) {
     super(props);
-    autoBind(this);
+    autobind(this);
   }
 
   componentDidMount() {
@@ -62,7 +62,8 @@ class TopicsScreen extends Component<void, void> {
       <ListRow
         rowId={topicUrl}
         onClick={this.onRowClick}
-        selected={isSelected}>
+        selected={isSelected}
+      >
         <h3>{topic.title}</h3>
         <p>{topic.description}</p>
       </ListRow>

@@ -2,9 +2,11 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "commonjs",
-    "target": "es5",
+    "target": "es2015",
     "lib": [
+      "es5",
       "es6",
+      "es7",
       "dom",
       "es2017"
     ],
@@ -20,7 +22,8 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
