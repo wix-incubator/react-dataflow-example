@@ -2,8 +2,8 @@
 // they receive data from their parents through regular react props
 // any local component state and logic should be handled by presenters
 
-import _ from 'lodash';
-import React, { Component } from 'react';
+import * as _ from 'lodash';
+import * as React from 'react';
 
 import { Topic } from '../stores/Topic';
 
@@ -14,7 +14,7 @@ interface Props {
   onChanged?: (id: string) => void;
 }
 
-export default class TopicFilter extends Component<Props, void> {
+export default class TopicFilter extends React.Component<Props, void> {
 
   render() {
     return (

@@ -2,8 +2,8 @@
 // they observe the state using selectors and draw themselved using dumb components
 // avoid having view logic & local component state in them, use "dumb" components (with presenters) instead
 
-import React, { Component } from 'react';
-import autobind from 'react-autobind';
+import * as React from 'react';
+import * as autobind from 'react-autobind';
 import './TopicsScreen.css';
 
 import { connect } from 'remx/react';
@@ -16,7 +16,7 @@ const ConnectedListView = connect(ListView);
 import * as topicsStore from '../stores/topics/store';
 import * as topicsActions from '../stores/topics/actions';
 
-class TopicsScreen extends Component<void, void> {
+class TopicsScreen extends React.Component<void, void> {
   constructor(props) {
     super(props);
     autobind(this);

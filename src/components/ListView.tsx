@@ -2,9 +2,9 @@
 // they receive data from their parents through regular react props
 // any local component state and logic should be handled by presenters
 
-import _ from 'lodash';
-import React, { Component } from 'react';
-import autobind from 'react-autobind';
+import * as _ from 'lodash';
+import * as React from 'react';
+import * as autobind from 'react-autobind';
 
 interface Props {
   rowsById: {};
@@ -12,7 +12,7 @@ interface Props {
   renderRow?: (rowId: string, row: {}) => JSX.Element;
 }
 
-export default class ListView extends Component<Props, void> {
+export default class ListView extends React.Component<Props, void> {
   constructor(props) {
     super(props);
     autobind(this);

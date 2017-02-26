@@ -35,5 +35,8 @@
     "src/setupTests.ts",
     "coverage",
     "wallaby.js"
+  ],
+  "files": [
+    "src/index.tsx"
   ]
 }

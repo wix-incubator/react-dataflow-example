@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Component } from 'react';
 import './App.css';
 
 import { connect } from 'remx/react';
@@ -9,7 +8,7 @@ import PostsScreen from './PostsScreen';
 
 import * as topicsStore from '../stores/topics/store';
 
-class App extends Component<void, void> {
+class App extends React.Component<void, void> {
   render() {
     return (
       <div className="App">

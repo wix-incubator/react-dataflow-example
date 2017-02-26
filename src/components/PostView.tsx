@@ -2,9 +2,9 @@
 // they receive data from their parents through regular react props
 // any local component state and logic should be handled by presenters
 
-import React, { Component } from 'react';
+import * as React from 'react';
 
-export default class PostView extends Component<any, void> {
+export default class PostView extends React.Component<any, void> {
   render() {
     if (!this.props.post) return this.renderEmpty();
     if (this.props.post.body) return this.renderBody();
