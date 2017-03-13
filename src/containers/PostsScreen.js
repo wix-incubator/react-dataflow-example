@@ -62,7 +62,7 @@ class PostsScreen extends Component {
   }
 
   renderRow(postId, post) {
-    const selected = this.props.selectedPostId == postId;
+    const selected = _.isEqual(this.props.selectedPostId, postId);
 
     return (
       <ListRow

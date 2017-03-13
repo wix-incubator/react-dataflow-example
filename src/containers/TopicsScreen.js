@@ -5,12 +5,12 @@
 import React, { Component } from 'react';
 import './TopicsScreen.css';
 
+import _ from 'lodash';
+
 import { connect } from 'remx/react';
 
 import ListView from '../components/ListView';
 import ListRow from '../components/ListRow';
-
-const ConnectedListView = connect()(ListView);
 
 import * as topicsStore from '../stores/topics/store';
 import * as topicsActions from '../stores/topics/actions';
@@ -28,21 +28,17 @@ class TopicsScreen extends Component {
   }
 
   render() {
-    if (topicsStore.getters.isLoading()) return this.renderLoading();
+    if (this.props.isLoading) return this.renderLoading();
 
-    const topicsByUrl = topicsStore.getters.getAllTopicsByUrl();
-    const topicUrlsArray = topicsStore.getters.getAllTopicsUrls();
-
-    const canFinalizeSelection = topicsStore.getters.canFinishTopicsSelection();
 
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
-        <ConnectedListView
-          rowsIdArray={topicUrlsArray}
-          rowsById={topicsByUrl}
+        <ListView
+          rowsIdArray={this.props.topicUrlsArray}
+          rowsById={this.props.topicsByUrl}
           renderRow={this.renderRow} />
-        {!canFinalizeSelection ? false :
+        {!this.props.canFinalizeSelection ? false :
           <button className="NextScreen" onClick={this.onNextScreenClick} />
         }
       </div>
@@ -56,7 +52,7 @@ class TopicsScreen extends Component {
   }
 
   renderRow(topicUrl, topic) {
-    const isSelected = topicsStore.getters.isTopicSelected(topicUrl);
+    const isSelected = _.includes(this.props.selectedTopicUrlsArray, topicUrl);
 
     return (
       <ListRow
@@ -78,4 +74,14 @@ class TopicsScreen extends Component {
   }
 }
 
-export default connect()(TopicsScreen);
+function mapStateToProps(ownProps) {
+  return {
+    isLoading: topicsStore.getters.isLoading(),
+    topicsByUrl: topicsStore.getters.getAllTopicsByUrl(),
+    topicUrlsArray: topicsStore.getters.getAllTopicsUrls(),
+    canFinalizeSelection: topicsStore.getters.canFinishTopicsSelection(),
+    selectedTopicUrlsArray: topicsStore.getters.getSelectedTopicUrls()
+  };
+}
+
+export default connect(mapStateToProps)(TopicsScreen);
