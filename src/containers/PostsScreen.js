@@ -3,7 +3,6 @@
 // avoid having view logic & local component state in them, use "dumb" components (with presenters) instead
 
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
 import './PostsScreen.css';
 
 import { connect } from 'remx/react';
@@ -20,7 +19,9 @@ import * as topicsStore from '../stores/topics/store';
 class PostsScreen extends Component {
   constructor(props) {
     super(props);
-    autoBind(this);
+    this.renderRow = this.renderRow.bind(this);
+    this.onRowClick = this.onRowClick.bind(this);
+    this.onFilterChanged = this.onFilterChanged.bind(this);
   }
 
   componentDidMount() {

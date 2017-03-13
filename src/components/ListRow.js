@@ -3,12 +3,11 @@
 // any local component state and logic should be handled by presenters
 
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
 
 export default class ListRow extends Component {
   constructor(props) {
     super(props);
-    autoBind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   render() {

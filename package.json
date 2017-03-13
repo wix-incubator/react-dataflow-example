@@ -12,7 +12,6 @@
     "lodash": "4.x.x",
     "react": "15.4.2",
     "react-dom": "15.4.2",
-    "react-autobind": "1.x.x",
     "remx": "0.x.x"
   },
   "devDependencies": {
