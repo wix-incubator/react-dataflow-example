@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import './PostsScreen.css';
 
+import _ from 'lodash';
+
 import { connect } from 'remx/react';
 
 import ListRow from '../components/ListRow';
@@ -29,32 +31,25 @@ class PostsScreen extends Component {
   }
 
   render() {
-    if (postsStore.getters.isLoading()) return this.renderLoading();
-
-    const postsById = postsStore.getters.getFilteredPostsById();
-    const postsIdArray = postsStore.getters.getFilteredPostsIdsArray();
-    const selectedPost = postsStore.getters.getSelectedPost();
-
-    const topicsByUrl = topicsStore.getters.getSelectedTopicsByUrl();
-    const currentFilter = postsStore.getters.getCurrentFilter();
+    if (this.props.isLoading) return this.renderLoading();
 
     return (
       <div className="PostsScreen">
         <div className="LeftPane">
           <TopicFilter
             className="TopicFilter"
-            topics={topicsByUrl}
-            selected={currentFilter}
+            topics={this.props.topicsByUrl}
+            selected={this.props.currentFilter}
             onChanged={this.onFilterChanged}
           />
           <ListView
-            rowsIdArray={postsIdArray}
-            rowsById={postsById}
+            rowsIdArray={this.props.postsIdArray}
+            rowsById={this.props.postsById}
             renderRow={this.renderRow}
           />
         </div>
         <div className="ContentPane">
-          <PostView post={selectedPost} />
+          <PostView post={this.props.selectedPost} />
         </div>
       </div>
     );
@@ -67,7 +62,7 @@ class PostsScreen extends Component {
   }
 
   renderRow(postId, post) {
-    const selected = postsStore.getters.isPostSelected(postId);
+    const selected = this.props.selectedPostId == postId;
 
     return (
       <ListRow
@@ -91,4 +86,17 @@ class PostsScreen extends Component {
   }
 }
 
-export default connect()(PostsScreen);
+
+function mapStateToProps(ownProps) {
+  return {
+    isLoading: postsStore.getters.isLoading(),
+    postsById: postsStore.getters.getFilteredPostsById(),
+    postsIdArray: postsStore.getters.getFilteredPostsIdsArray(),
+    selectedPost: postsStore.getters.getSelectedPost(),
+    topicsByUrl: topicsStore.getters.getSelectedTopicsByUrl(),
+    currentFilter: postsStore.getters.getCurrentFilter(),
+    selectedPostId: postsStore.getters.getSelectedPostId()
+  };
+}
+
+export default connect(mapStateToProps)(PostsScreen);

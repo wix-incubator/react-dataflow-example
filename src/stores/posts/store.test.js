@@ -71,4 +71,10 @@ describe('posts store', () => {
     expect(store.getters.isPostMatchesFilter({ topicUrl: 'someTopicUrl' })).toBe(true);
     store.setters.setFilter(undefined);
   });
+
+  it('getSelectedPostId', () => {
+    expect(store.getters.getSelectedPostId()).toEqual('');
+    store.setters.selectPost('thePostId');
+    expect(store.getters.getSelectedPostId()).toEqual('thePostId');
+  });
 });

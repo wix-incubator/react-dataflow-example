@@ -51,5 +51,9 @@ export const getters = remx.getters({
   isPostMatchesFilter(post) {
     const filter = getters.getCurrentFilter();
     return _.isEqual(filter, 'all') || _.isEqual(filter, post.topicUrl);
+  },
+
+  getSelectedPostId() {
+    return state.selectedPostId;
   }
 });
