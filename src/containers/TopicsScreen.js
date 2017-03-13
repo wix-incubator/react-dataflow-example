@@ -10,8 +10,6 @@ import { connect } from 'remx/react';
 import ListView from '../components/ListView';
 import ListRow from '../components/ListRow';
 
-const ConnectedListView = connect(ListView);
-
 import * as topicsStore from '../stores/topics/store';
 import * as topicsActions from '../stores/topics/actions';
 
@@ -38,7 +36,7 @@ class TopicsScreen extends Component {
     return (
       <div className="TopicsScreen">
         <h3>Choose 3 topics of interest</h3>
-        <ConnectedListView
+        <ListView
           rowsIdArray={topicUrlsArray}
           rowsById={topicsByUrl}
           renderRow={this.renderRow} />
@@ -78,4 +76,4 @@ class TopicsScreen extends Component {
   }
 }
 
-export default connect(TopicsScreen);
+export default connect()(TopicsScreen);

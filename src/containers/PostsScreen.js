@@ -91,4 +91,4 @@ class PostsScreen extends Component {
   }
 }
 
-export default connect(PostsScreen);
+export default connect()(PostsScreen);

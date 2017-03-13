@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         {
-          topicsStore.getters.isFinishedTopicsSelection() ?
+          this.props.isFinishedTopicsSelection ?
             < PostsScreen />
             :
             < TopicsScreen />
@@ -23,4 +23,10 @@ class App extends Component {
   }
 }
 
-export default connect(App);
+function mapStateToProps(ownProps) {
+  return {
+    isFinishedTopicsSelection: topicsStore.getters.isFinishedTopicsSelection()
+  };
+}
+
+export default connect(mapStateToProps)(App);
