@@ -1,3 +1,4 @@
+import { Reducer } from 'redux-testkit';
 import uut from '../reducer';
 
 const initialState = {
@@ -11,4 +12,8 @@ describe('store/topics/reducer', () => {
     expect(uut()).toEqual(initialState);
   });
 
+  it('should not affect state', () => {
+    Reducer(uut).expect({type: 'NOT_EXISTING'}).toReturnState(initialState);
+  });
+  
 });
