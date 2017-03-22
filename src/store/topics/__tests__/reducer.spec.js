@@ -25,18 +25,18 @@ describe('store/topics/reducer', () => {
   });
   
   it('should store fetched topics and override existing topics', () => {
-    const exisingState = Immutable({...initialState, topicsByUrl: {url3: 'topic3'}});
+    const existingState = Immutable({...initialState, topicsByUrl: {url3: 'topic3'}});
     const topicsByUrl = {url1: 'topic1', url2: 'topic2'};
     const action = {type: actionTypes.TOPICS_FETCHED, topicsByUrl};
-    Reducer(uut, exisingState).expect(action).toReturnState({...initialState, topicsByUrl});
+    Reducer(uut, existingState).expect(action).toReturnState({...initialState, topicsByUrl});
   });
 
   it('should store selected topics', () => {
     const selectedTopicUrls = ['url1', 'url2'];
     const action = {type: actionTypes.TOPICS_SELECTED, selectedTopicUrls};
     Reducer(uut).expect(action).toReturnState({...initialState, selectedTopicUrls});
-    const exisingState = Immutable({...initialState, selectedTopicUrls: ['url3']});
-    Reducer(uut, exisingState).expect(action).toReturnState({...initialState, selectedTopicUrls});
+    const existingState = Immutable({...initialState, selectedTopicUrls: ['url3']});
+    Reducer(uut, existingState).expect(action).toReturnState({...initialState, selectedTopicUrls});
   });
   
   it('should set topic selection flag on', () => {
