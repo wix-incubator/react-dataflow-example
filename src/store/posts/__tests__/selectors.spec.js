@@ -45,7 +45,7 @@ describe('store/posts/selectors', () => {
   it('should get current filter', () => {
     expect(uut.getCurrentFilter(state)).toBe(state.posts.currentFilter);
   });
-  
+
   it('should get current post', () => {
     expect(uut.getCurrentPost(state)).toBe(undefined);
     const stateClone = _.cloneDeep(state);
