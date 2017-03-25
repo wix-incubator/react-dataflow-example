@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Immutable from 'seamless-immutable';
+import { Selector } from 'redux-testkit';
 import * as uut from '../reducer';
 
 const state = Immutable({
@@ -29,28 +30,26 @@ const state = Immutable({
 describe('store/posts/selectors', () => {
 
   it('should get posts', () => {
-    const [postsById, postsIdArray] = uut.getPosts(state);
-    expect(postsById).toBe(state.posts.postsById);
-    expect(postsIdArray).toEqual(['id1', 'id2', 'id3']);
+    const result = [state.posts.postsById, ['id1', 'id2', 'id3']];
+    Selector(uut.getPosts).expect(state).toReturn(result);
   });
 
   it('should get posts, with specific filter', () => {
     const stateClone = _.cloneDeep(state);
     stateClone.posts.currentFilter = 'cats';
-    const [postsById, postsIdArray] = uut.getPosts(stateClone);
-    expect(postsById).toBe(stateClone.posts.postsById);
-    expect(postsIdArray).toEqual(['id1', 'id3']);
+    const result = [stateClone.posts.postsById, ['id1', 'id3']];
+    Selector(uut.getPosts).expect(stateClone).toReturn(result);
   });
 
   it('should get current filter', () => {
-    expect(uut.getCurrentFilter(state)).toBe(state.posts.currentFilter);
+    Selector(uut.getCurrentFilter).expect(state).toReturn(state.posts.currentFilter);
   });
 
   it('should get current post', () => {
-    expect(uut.getCurrentPost(state)).toBe(undefined);
+    Selector(uut.getCurrentPost).expect(state).toReturn(undefined);
     const stateClone = _.cloneDeep(state);
     stateClone.posts.currentPostId = 'id1';
-    expect(uut.getCurrentPost(stateClone)).toBe(stateClone.posts.postsById['id1']);
+    Selector(uut.getCurrentPost).expect(stateClone).toReturn(stateClone.posts.postsById['id1']);
   });
 
 });
