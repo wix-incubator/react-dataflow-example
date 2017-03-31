@@ -22,10 +22,6 @@ class PostsScreen extends Component {
     autoBind(this);
   }
 
-  componentDidMount() {
-    this.props.dispatch(postsActions.fetchPosts());
-  }
-
   render() {
     if (!this.props.postsById) return this.renderLoading();
     return (
