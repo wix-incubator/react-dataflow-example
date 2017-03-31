@@ -9,6 +9,7 @@ import _ from 'lodash';
 import * as types from './actionTypes';
 import redditService from '../../services/reddit';
 import * as topicsSelectors from './reducer';
+import * as postActions from '../posts/actions';
 
 export function fetchTopics() {
   return async(dispatch, getState) => {
@@ -34,6 +35,10 @@ export function selectTopic(topicUrl) {
         selectedTopics.slice(1).concat(topicUrl);
     }
     dispatch({ type: types.TOPICS_SELECTED, selectedTopicUrls: newSelectedTopics  });
+    // optimization - prefetch the posts before going to the posts screen
+    if (newSelectedTopics.length === 3) {
+      dispatch(postActions.fetchPosts());
+    }
   };
 }
 
