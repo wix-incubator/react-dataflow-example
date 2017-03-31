@@ -10,7 +10,7 @@ const initialState = {
 };
 
 describe('store/topics/reducer', () => {
-  
+
   it('should have initial state', () => {
     expect(uut()).toEqual(initialState);
   });
@@ -29,7 +29,7 @@ describe('store/topics/reducer', () => {
     const existingState = Immutable({...initialState, topicsByUrl: {url3: 'topic3'}});
     const topicsByUrl = {url1: 'topic1', url2: 'topic2'};
     const action = {type: actionTypes.TOPICS_FETCHED, topicsByUrl};
-    Reducer(uut, existingState).expect(action).toReturnState({...initialState, topicsByUrl});
+    Reducer(uut).withState(existingState).expect(action).toReturnState({...initialState, topicsByUrl});
   });
 
   it('should store selected topics', () => {
@@ -37,7 +37,7 @@ describe('store/topics/reducer', () => {
     const action = {type: actionTypes.TOPICS_SELECTED, selectedTopicUrls};
     Reducer(uut).expect(action).toReturnState({...initialState, selectedTopicUrls});
     const existingState = Immutable({...initialState, selectedTopicUrls: ['url3']});
-    Reducer(uut, existingState).expect(action).toReturnState({...initialState, selectedTopicUrls});
+    Reducer(uut).withState(existingState).expect(action).toReturnState({...initialState, selectedTopicUrls});
   });
 
   it('should set topic selection flag on', () => {

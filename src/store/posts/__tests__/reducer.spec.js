@@ -23,7 +23,7 @@ describe('store/posts/reducer', () => {
     const action = {type: actionTypes.POSTS_FETCHED, postsById};
     Reducer(uut).expect(action).toReturnState({...initialState, postsById});
     const existingState = Immutable({...initialState, postsById: {id3: 'post3'}});
-    Reducer(uut, existingState).expect(action).toReturnState({...initialState, postsById});
+    Reducer(uut).withState(existingState).expect(action).toReturnState({...initialState, postsById});
   });
 
   it('should update current post filter', () => {
