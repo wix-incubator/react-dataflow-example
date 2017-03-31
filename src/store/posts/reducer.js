@@ -7,6 +7,7 @@
 import _ from 'lodash';
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
+import * as topicsSelectors from '../topics/reducer';
 
 const initialState = Immutable({
   postsById: undefined,
@@ -38,8 +39,9 @@ export default function reduce(state = initialState, action = {}) {
 export function getPosts(state) {
   const currentFilter = state.posts.currentFilter;
   const postsById = state.posts.postsById;
+  const currentTopicUrls = topicsSelectors.getSelectedTopicsByUrl(state);
   const postsIdArray = currentFilter === 'all' ?
-    _.keys(postsById) :
+    _.filter(_.keys(postsById), (postId) => currentTopicUrls[postsById[postId].topicUrl]) :
     _.filter(_.keys(postsById), (postId) => postsById[postId].topicUrl === currentFilter);
   return [postsById, postsIdArray];
 }
