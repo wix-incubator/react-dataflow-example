@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import Immutable from 'seamless-immutable';
 import { Selector } from 'redux-testkit';
-import * as uut from '../reducer';
 
 const state = Immutable({
   posts: {
@@ -29,12 +28,22 @@ const state = Immutable({
 
 describe('store/posts/selectors', () => {
 
+  let uut, topicsSelectors;
+
+  beforeEach(() => {
+    jest.mock('../../topics/reducer');
+    topicsSelectors = require('../../topics/reducer');
+    uut = require('../reducer');
+  });
+
   it('should get posts', () => {
+    topicsSelectors.getSelectedTopicsByUrl.mockReturnValueOnce({ cats: { title: 'cats' }, funny: { title: 'funny' }});
     const result = [state.posts.postsById, ['id1', 'id2', 'id3']];
     Selector(uut.getPosts).expect(state).toReturn(result);
   });
 
   it('should get posts, with specific filter', () => {
+    topicsSelectors.getSelectedTopicsByUrl.mockReturnValueOnce({ cats: { title: 'cats' }, funny: { title: 'funny' }});
     const stateClone = _.cloneDeep(state);
     stateClone.posts.currentFilter = 'cats';
     const result = [stateClone.posts.postsById, ['id1', 'id3']];
@@ -50,6 +59,10 @@ describe('store/posts/selectors', () => {
     const stateClone = _.cloneDeep(state);
     stateClone.posts.currentPostId = 'id1';
     Selector(uut.getCurrentPost).expect(stateClone).toReturn(stateClone.posts.postsById['id1']);
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks().resetModules();
   });
 
 });
