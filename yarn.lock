@@ -4304,9 +4304,9 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-testkit@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/redux-testkit/-/redux-testkit-1.0.5.tgz#63baf9418c9ff3fc253ec9da21917d903d0127bd"
+redux-testkit@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/redux-testkit/-/redux-testkit-1.0.6.tgz#58b2b389455be927a4eff796060a17eee89d9393"
   dependencies:
     babel-polyfill "^6.8.0"
     lodash "^4.0.0"
