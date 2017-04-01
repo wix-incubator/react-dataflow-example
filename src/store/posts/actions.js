@@ -11,7 +11,7 @@ import redditService from '../../services/reddit';
 import * as topicsSelectors from '../topics/reducer';
 
 export function fetchPosts() {
-  return async(dispatch, getState) => {
+  return async function fetchPosts(dispatch, getState) {
     try {
       const selectedTopicUrls = topicsSelectors.getSelectedTopicUrls(getState());
       const fetchPromises = _.map(selectedTopicUrls, (topicUrl) => redditService.getPostsFromSubreddit(topicUrl));
