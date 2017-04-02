@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "jest-fetch-mock": "^1.0.8",
     "react-scripts": "0.9.5",
     "redux-testkit": "^1.0.6"
   },
