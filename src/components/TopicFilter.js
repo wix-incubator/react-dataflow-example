@@ -12,19 +12,20 @@ export default class TopicFilter extends Component {
     return (
       <div className={this.props.className}>
         {this.renderFilter('all', 'All')}
-        {_.map(this.props.topics, (topic, topicId) => this.renderFilter(topicId, topic.title))}
+        {this.props.topics.map((topic) => this.renderFilter(topic.url,topic.title))}
       </div>
     );
   }
 
-  renderFilter(id, label) {
-    const className = this.props.selected === id ? 'selected' : undefined;
+  renderFilter(url, label) {
+    const className = this.props.selected === url ? 'selected' : undefined;
     return (
-      <a
-        key={id}
+      <a 
+        data-hook="filter"
+        key={url}
         href="#"
         className={className}
-        onClick={() => this.onFilterClick(id)}>
+        onClick={() => this.onFilterClick(url)}>
         {label}
       </a>
     );

@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as topicsSelectors from './store/topics/reducer';
 import TopicsScreen from './containers/TopicsScreen';
 import PostsScreen from './containers/PostsScreen';
 import './App.css';
+import {inject,observer} from 'mobx-react';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        {!this.props.isSelectionFinalized ?
-          <TopicsScreen /> :
-          <PostsScreen />
+        {this.props.appStore.isSelectionFinalized ?
+          <PostsScreen/> :
+          <TopicsScreen/>
         }
       </div>
     );
   }
 }
-
-// which props do we want to inject, given the global store state?
-function mapStateToProps(state) {
-  return {
-    isSelectionFinalized: topicsSelectors.isTopicSelectionFinalized(state)
-  };
-}
-
-export default connect(mapStateToProps)(App);
+// the inject function connects the component to the AppStore (provided by the provider), 
+// the observer function will make sure that our component will be re-rendered upon any observable change.
+// behind the scenes, observer just wraps the component's render function with autorun (read Mobx api)
+export default inject('appStore')(observer(App));

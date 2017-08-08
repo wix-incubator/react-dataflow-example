@@ -38,7 +38,7 @@ export default class PostView extends Component {
 
   renderUrl() {
     return (
-      <div>
+      <div data-hook="urlPreview">
         <h3>External Link</h3>
         <a href={this.props.post.url} target="_blank">Open</a>
       </div>

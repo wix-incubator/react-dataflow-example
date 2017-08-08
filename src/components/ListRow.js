@@ -17,6 +17,7 @@ export default class ListRow extends Component {
     const backgroundColor = this.props.selected ? '#c0f0ff' : '#fff';
     return (
       <div
+        data-hook="listRow"
         style={{ backgroundColor }}
         onClick={this.onClick}>
         {this.props.children}
@@ -26,7 +27,7 @@ export default class ListRow extends Component {
 
   onClick() {
     if (typeof this.props.onClick === 'function') {
-      this.props.onClick(this.props.rowId);
+      this.props.onClick(this.props.item);
     }
   }
 
