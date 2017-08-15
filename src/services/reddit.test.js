@@ -5,7 +5,7 @@ describe('reddit service', () => {
   beforeEach(() => {
     jest.mock('./http');
     mockHttp = require('./http');
-
+    mockHttp.get = jest.fn();
     reddit = require('./reddit');
   });
 

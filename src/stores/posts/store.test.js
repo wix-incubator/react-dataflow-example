@@ -36,7 +36,7 @@ describe('posts store', () => {
     store.setters.setPosts([post2]);
     expect(store.getters.getSelectedPost()).toEqual(undefined);
     store.setters.setPosts([post2, post1]);
-    expect(store.getters.getSelectedPost()).toBe(post1);
+    expect(store.getters.getSelectedPost()).toEqual(post1);
   });
 
   it('is post selected', () => {

@@ -5,10 +5,12 @@ describe('topics actions', () => {
   beforeEach(() => {
     jest.mock('../../services/reddit');
     mockRedditService = require('../../services/reddit');
+    mockRedditService.getDefaultSubreddits = jest.fn();
     jest.mock('./store');
     mockStore = require('./store');
-    jest.mock('../posts/actions');
+    mockStore.setters.toggleTopic = jest.fn();
     mockPostsActions = require('../posts/actions');
+    mockPostsActions.fetchPosts = jest.fn();
 
     actions = require('./actions');
   });

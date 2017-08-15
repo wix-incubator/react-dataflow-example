@@ -12,9 +12,11 @@ describe('posts actions', () => {
 
     jest.mock('../topics/store');
     mockTopicsStore = require('../topics/store');
+    mockTopicsStore.getters.getSelectedTopicUrls = jest.fn();
 
     jest.mock('../../services/reddit');
     mockReddit = require('../../services/reddit');
+    mockReddit.getPostsFromSubreddit = jest.fn();
 
     actions = require('./actions');
   });

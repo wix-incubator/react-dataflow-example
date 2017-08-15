@@ -28,7 +28,7 @@
     "eslint": "3.x.x",
     "eslint-plugin-babel": "4.x.x",
     "eslint-plugin-react": "6.x.x",
-    "react-scripts": "latest"
+    "react-scripts": "0.9.3"
   },
   "babel": {
     "presets": [

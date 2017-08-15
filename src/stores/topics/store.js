@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import * as remx from 'remx';
-
 const MAX_TOPICS_SELECTED = 3;
 
 const state = remx.state({
@@ -48,7 +47,7 @@ export const getters = remx.getters({
   },
 
   getSelectedTopicUrls() {
-    return remx.toJS(state.selectedTopicUrls);
+    return state.selectedTopicUrls;
   },
 
   getSelectedTopicsByUrl() {
